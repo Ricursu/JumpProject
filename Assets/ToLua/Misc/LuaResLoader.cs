@@ -25,6 +25,8 @@ using UnityEngine;
 using LuaInterface;
 using System.IO;
 using System.Text;
+using System;
+using System.Collections;
 
 public class LuaResLoader : LuaFileUtils
 {
@@ -34,10 +36,24 @@ public class LuaResLoader : LuaFileUtils
         beZip = false;
     }
 
+    private AssetBundle assetBundle;
+
     public override byte[] ReadFile(string fileName)
     {
 #if !UNITY_EDITOR
-        byte[] buffer = ReadDownLoadFile(fileName);
+        byte[] buffer = null;
+        if(buffer == null)
+        {
+            buffer = ReadUpDateFile(fileName);
+        }
+        if (buffer == null)
+        {
+            buffer = ReadPersistentFile(fileName);
+        } 
+        if (buffer == null)
+        {
+            buffer = ReadDownLoadFile(fileName);
+        } 
 
         if (buffer == null)
         {
@@ -49,21 +65,45 @@ public class LuaResLoader : LuaFileUtils
             buffer = base.ReadFile(fileName);
         }        
 #else
-        byte[] buffer = base.ReadFile(fileName);
-
+        byte[] buffer = null;
+        if(buffer == null)
+        {
+            buffer = ReadUpDateFile(fileName);
+        }
+        if (buffer == null)
+        {
+            buffer = ReadPersistentFile(fileName);
+        }
+        if (buffer == null)
+        {
+            buffer = base.ReadFile(fileName);
+        }
         if (buffer == null)
         {
             buffer = ReadResourceFile(fileName);
         }
-
         if (buffer == null)
         {
             buffer = ReadDownLoadFile(fileName);
         }
+
+
 #endif
 
         return buffer;
     }
+
+    void InitAssetBundle(string filename)
+    {
+        try
+        {
+            assetBundle = AssetBundle.LoadFromFile(filename);
+        }catch(Exception e)
+        {
+            Debug.Log("" + e.GetType() + e.GetBaseException());
+        }
+    }
+
 
     public override string FindFileError(string fileName)
     {
@@ -93,6 +133,71 @@ public class LuaResLoader : LuaFileUtils
 
             return sb.ToString();
         }
+    }
+
+    byte[] ReadUpDateFile(string fileName)
+    {
+        if (Application.platform != RuntimePlatform.Android)
+            return null;
+
+
+        //Debug.Log("\n====================\n====================\n UpDate:" + fileName + "\n=========================\n=========================\n");
+        if (!fileName.EndsWith(".lua"))
+        {
+            fileName += ".lua";
+        }
+
+        byte[] buffer = null;
+        string path = "UpData/" + fileName;
+        TextAsset text = Resources.Load(path, typeof(TextAsset)) as TextAsset;
+
+        if (text != null)
+        {
+            buffer = text.bytes;
+            Resources.UnloadAsset(text);
+        }
+
+        return buffer;
+    }
+
+    byte[] ReadPersistentFile(string fileName)
+    {
+        if (Application.platform != RuntimePlatform.Android)
+            return null;
+
+        if (fileName.EndsWith(".lua"))
+            fileName += ".bytes";
+        else if(!fileName.EndsWith(".lua.bytes"))
+            fileName += ".lua.bytes";
+
+        byte[] buffer = null;
+
+        string persistentDate = Application.persistentDataPath + "/Android/Lua";
+        if (!Directory.Exists(persistentDate))
+            Directory.CreateDirectory(persistentDate);
+        string[] files = Directory.GetDirectories(persistentDate);
+        if (files.Length == 0)
+            return null;
+
+        foreach(string path in files)
+        {
+            try
+            {
+                InitAssetBundle(path + "/luascript.unity3d");
+                buffer = Encoding.UTF8.GetBytes(assetBundle.LoadAsset<TextAsset>(Path.GetFileName(fileName)).text);
+                if (fileName.Contains("Login"))
+                    Debug.Log(buffer.ToString() + "    " + assetBundle.LoadAsset<TextAsset>(Path.GetFileName(fileName)).text);
+            }
+            catch (Exception e)
+            {
+                continue;
+            }finally
+            {
+                assetBundle.Unload(false);
+            }
+            break;
+        }
+        return buffer;
     }
 
     byte[] ReadResourceFile(string fileName)

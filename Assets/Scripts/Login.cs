@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LuaInterface;
 using System.IO;
+using ICSharpCode.SharpZipLib.Checksum;
 
 public class Login : MonoBehaviour
 {

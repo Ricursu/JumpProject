@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - HotUpdate
     - Login
     - LuaManager
     - Player
@@ -56,21 +57,21 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11186}
+      Script: {instanceID: 11188}
     - Class: 114
-      Script: {instanceID: 11392}
+      Script: {instanceID: 11410}
     - Class: 114
-      Script: {instanceID: 11436}
+      Script: {instanceID: 11460}
     - Class: 114
-      Script: {instanceID: 11450}
+      Script: {instanceID: 11476}
     - Class: 114
-      Script: {instanceID: 11890}
+      Script: {instanceID: 11950}
     - Class: 114
-      Script: {instanceID: 12378}
+      Script: {instanceID: 12506}
     - Class: 114
-      Script: {instanceID: 12958}
+      Script: {instanceID: 13130}
     - Class: 114
-      Script: {instanceID: 13376}
+      Script: {instanceID: 13586}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -131,29 +132,31 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11186}
+      Script: {instanceID: 11188}
     - Class: 114
-      Script: {instanceID: 11392}
+      Script: {instanceID: 11410}
     - Class: 114
-      Script: {instanceID: 11436}
+      Script: {instanceID: 11460}
     - Class: 114
-      Script: {instanceID: 11450}
+      Script: {instanceID: 11476}
     - Class: 114
-      Script: {instanceID: 11890}
+      Script: {instanceID: 11640}
     - Class: 114
-      Script: {instanceID: 12106}
+      Script: {instanceID: 11950}
     - Class: 114
-      Script: {instanceID: 12246}
+      Script: {instanceID: 12194}
     - Class: 114
-      Script: {instanceID: 12270}
+      Script: {instanceID: 12348}
     - Class: 114
       Script: {instanceID: 12378}
     - Class: 114
-      Script: {instanceID: 12856}
+      Script: {instanceID: 12506}
     - Class: 114
-      Script: {instanceID: 12958}
+      Script: {instanceID: 13020}
     - Class: 114
-      Script: {instanceID: 13376}
+      Script: {instanceID: 13130}
+    - Class: 114
+      Script: {instanceID: 13586}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -337,6 +340,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TestPerformance
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: HotUpdate
   - hash:
       serializedVersion: 2
       Hash: bd3cf68c8964d3c66d1c43f4f98508c9
@@ -681,6 +690,12 @@ ScriptsOnlyBuild:
     className: GraphicRaycaster
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UnZipTool
+  - hash:
+      serializedVersion: 2
       Hash: 88cc9df3c6fc697bfbeacd24c0d6f2d7
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools
@@ -857,4 +872,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/Jump.unity
-  playerPath: D:/Github2/JumpProject-main/test.apk
+  playerPath: D:/APK/new.apk

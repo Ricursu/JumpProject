@@ -9,16 +9,21 @@ public class CreateAssetBundle
     [MenuItem("AssetBundle/Build AssetBundle")]
     static void BuildAssetBundle()
     {
+        Debug.Log("Build Asset Bundle");
+
+
         string streamPath = Application.streamingAssetsPath;
         if (Directory.Exists(streamPath))
         {
-            Directory.Delete(streamPath,true);
+            Directory.Delete(streamPath, true);
         }
         Directory.CreateDirectory(streamPath);
-        // 资源管理器刷新
-        AssetDatabase.Refresh();
-        //LZMA压缩结果体积较小，解压时间较长BuildAssetBundleOptions.None
-        //LZ4压缩结果体积较大，解压时间较短 BuildAssetBundleOptions.ChunkBasedCompression
-        BuildPipeline.BuildAssetBundles(streamPath, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows64);
+
+        BuildPipeline.BuildAssetBundles(streamPath, BuildAssetBundleOptions.None, BuildTarget.Android);
+        //// 资源管理器刷新
+        //AssetDatabase.Refresh();
+        ////LZMA压缩结果体积较小，解压时间较长BuildAssetBundleOptions.None
+        ////LZ4压缩结果体积较大，解压时间较短 BuildAssetBundleOptions.ChunkBasedCompression
+        //BuildPipeline.BuildAssetBundles(streamPath, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows64);
     }
 }

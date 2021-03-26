@@ -66,6 +66,8 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\CreateAssetBundle.cs" />
     <Compile Include="Assets\Editor\Custom\CustomSettings.cs" />
+    <Compile Include="Assets\Editor\DiffTools.cs" />
+    <Compile Include="Assets\Editor\ZipTools.cs" />
     <Compile Include="Assets\ToLua\Editor\Extend\ToLua_LuaInterface_EventObject.cs" />
     <Compile Include="Assets\ToLua\Editor\Extend\ToLua_LuaInterface_LuaConstructor.cs" />
     <Compile Include="Assets\ToLua\Editor\Extend\ToLua_LuaInterface_LuaField.cs" />

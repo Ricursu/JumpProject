@@ -1,15 +1,7 @@
 ManifestFileVersion: 0
-CRC: 2213161136
+CRC: 585310931
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: testplayer.unity3d
-      Dependencies:
-        Dependency_0: testtex.unity3d
-        Dependency_1: effect.unity3d
-    Info_1:
-      Name: testtex.unity3d
-      Dependencies: {}
-    Info_2:
-      Name: effect.unity3d
+      Name: luascript.unity3d
       Dependencies: {}

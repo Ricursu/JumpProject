@@ -169,8 +169,8 @@ public class LuaClient : MonoBehaviour
 
     protected void Init()
     {
-        InitLoader();
-        //new LuaResLoader();
+        //InitLoader();
+        new LuaResLoader();
         luaState = new LuaState(); 
         OpenLibs();
         luaState.LuaSetTop(0);

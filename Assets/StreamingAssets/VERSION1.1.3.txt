@@ -1,0 +1,5 @@
+version:1.1.3
+luascript.unity3d - CRC:2466048685
+luascript.unity3d - MD5:2D8B78B8AA6B3973E704D776A1D1E197
+luascript.unity3d.manifest - CRC:3553510949
+luascript.unity3d.manifest - MD5:442C6CA6607E686EF68F95B4D46A594D

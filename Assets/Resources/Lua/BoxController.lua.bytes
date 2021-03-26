@@ -17,20 +17,24 @@ function this.Awake(obj)
 end
 
 function this.Update(obj)
-	if Input.GetKey(KeyCode.Space) then
+    if this.IsInView(obj.transform.position) then
+        GameObject.Destroy(obj, 1)
+    end
+
+	if Input.touchCount == 0 then
+		return
+	end
+
+	if Input.GetKey(KeyCode.Space) or Input.GetTouch(0).phase == TouchPhase.Stationary then
 		if currentBox.transform.localScale.y < 0.6 and currentBox.transform.localScale.y>0.39 then
 			currentBox.transform.localScale = currentBox.transform.localScale + Vector3(0, -1, 0) * 0.15 * Time.deltaTime
 			--currentBox.transform.localPosition = currentBox.transform.localPosition + Vector3(0, -1, 0) * 0.15 * Time.deltaTime
 		end
 	end
 
-	if Input.GetKeyUp(KeyCode.Space) then
+	if Input.GetKeyUp(KeyCode.Space) or Input.GetTouch(0).phase == TouchPhase.Ended then
         --Util.DoLocalMoveY(currentBox, 0.25, 0.2)
         Util.DoScale(currentBox, Vector3(orginScale.x, orginScale.y, orginScale.z), 0.2)
-
-    end
-    if this.IsInView(obj.transform.position) then
-        GameObject.Destroy(obj, 1)
     end
 end
 
