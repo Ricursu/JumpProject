@@ -11,11 +11,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.lua" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Lua/Main.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+            <state relative-caret-position="75">
+              <caret line="3" column="49" selection-start-line="3" selection-start-column="49" selection-end-line="3" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Login.lua.bytes" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Resources/Lua/Login.lua.bytes">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="6" column="50" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.lua.bytes" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Resources/Lua/Main.lua.bytes">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="3" column="48" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -23,8 +41,8 @@
       <file leaf-file-name="Login.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Lua/Login.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="12" column="34" selection-start-line="7" selection-start-column="22" selection-end-line="12" selection-end-column="34" />
+            <state relative-caret-position="150">
+              <caret line="6" column="49" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -36,10 +54,12 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Lua/Login.lua" />
         <option value="$PROJECT_DIR$/Assets/Lua/Main.lua" />
+        <option value="$PROJECT_DIR$/Assets/Resources/Lua/Main.lua.bytes" />
+        <option value="$PROJECT_DIR$/Assets/Resources/Lua/Login.lua.bytes" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="970" />
@@ -50,8 +70,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -68,6 +88,19 @@
               <item name="JumpProject-main" type="b2602c69:ProjectViewProjectNode" />
               <item name="JumpProject-main" type="462c0819:PsiDirectoryNode" />
               <item name="Assets" type="462c0819:PsiDirectoryNode" />
+              <item name="Lua" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JumpProject-main" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JumpProject-main" type="462c0819:PsiDirectoryNode" />
+              <item name="Assets" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JumpProject-main" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JumpProject-main" type="462c0819:PsiDirectoryNode" />
+              <item name="Assets" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
               <item name="Lua" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -111,7 +144,7 @@
     </configuration>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Designer" order="2" />
@@ -137,6 +170,20 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Assets/Lua/Main.lua">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Lua/Login.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="12" column="34" selection-start-line="7" selection-start-column="22" selection-end-line="12" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Lua/Main.lua">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="3" column="87" selection-start-line="3" selection-start-column="87" selection-end-line="3" selection-end-column="87" />
         </state>
@@ -151,15 +198,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Lua/Login.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="12" column="34" selection-start-line="7" selection-start-column="22" selection-end-line="12" selection-end-column="34" />
+        <state relative-caret-position="150">
+          <caret line="6" column="49" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="50" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Resources/UpData/Main.lua">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Resources/UpData/Login.lua">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Lua/Main.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+        <state relative-caret-position="75">
+          <caret line="3" column="49" selection-start-line="3" selection-start-column="49" selection-end-line="3" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Resources/Lua/Main.lua.bytes">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="3" column="48" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Resources/Lua/Login.lua.bytes">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="6" column="50" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="50" />
         </state>
       </provider>
     </entry>

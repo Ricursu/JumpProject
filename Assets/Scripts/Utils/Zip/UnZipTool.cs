@@ -8,12 +8,6 @@ using System.Text;
 
 public class UnZipTool : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     /// <summary>
     /// 解压文件名为zipname的压缩文件
     /// </summary>

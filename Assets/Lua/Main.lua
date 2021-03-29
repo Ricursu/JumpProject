@@ -1,7 +1,7 @@
 --主入口函数。从这里开始lua逻辑
 --全局变量
 function Main()
-	Debugger.Log("===============================================\n 这个文件是 Main.lua \n=========================================================");
+	Debugger.Log("\nMain: \n=================\n 旧的Main.lua \n===================")
 	GameObject = UnityEngine.GameObject
 	Transform = UnityEngine.Transform
 	ParticleSystem = UnityEngine.ParticleSystem

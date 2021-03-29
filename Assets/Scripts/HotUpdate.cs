@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using NETCore.Encrypt;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -11,23 +13,19 @@ public class HotUpdate : MonoBehaviour
     public static int mMajorVersion = 1;
     public static int mMinorVersion = 3;
 
+    public static string APKMD5 = "";
+
     /// <summary>
     /// 检查更新
     /// </summary>
     void Awake()
     {
-        string packageName = "com." + Application.companyName + "." + Application.productName;
-        Debug.Log("\n==================\n==================\n" + Application.streamingAssetsPath + "\n/data/app/" + packageName + "\n==================\n==================\n");
+        //string packageName = "com." + Application.companyName + "." + Application.productName;
 
-
-        StartCoroutine(GetApkFromFileManager());
-
-        //foreach(string filename in files)
-        //{
-        //    if(filename.Contains(packageName))
-        //        if (File.Exists(filename + "/base.apk"))
-        //            Debug.Log("\n==================\n==================\n Exixt Base.Apk \n==================\n==================\n");
-        //1}
+        GetApkFromFileManager();
+        Debug.Log("\n=======================\n" + APKMD5 + "\n=======================\n");
+        WebUtils.GetFileFromServer(APKMD5);
+        DiffUtils.ReductionApk("/reduction.apk", "/base.apk", "/Android/Lua/" + APKMD5);
 
 
         ///全量更新
@@ -47,29 +45,22 @@ public class HotUpdate : MonoBehaviour
         //StartCoroutine(ReadAssetBundle("luascript.unity3d.manifest"));
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     /// <summary>
     /// 通过UnityWebRequest从服务器端下载文件名为filename的文件
     /// </summary>
     /// <param name="fileName">需要下载的文件名</param>
     /// <returns></returns>
-    IEnumerator ReadAssetBundle(string fileName)
+    void ReadAssetBundle(string fileName)
     {
         string url = "http://10.230.17.74/" + fileName;
         UnityWebRequest request = UnityWebRequest.Get(url);
         request.SendWebRequest();
         while (!request.isDone)
         {
-            //Debug.Log("====================\n" + request.downloadProgress + "\n====================");
-            yield return 1;
+            Debug.Log("ReadAssetBundle:\n====================\n" + request.downloadProgress + "\n====================");
 
         }
+
         if (request.isDone)                  //下载完成
         {
             byte[] bytes = request.downloadHandler.data;
@@ -91,23 +82,34 @@ public class HotUpdate : MonoBehaviour
         }
     }
 
-    IEnumerator GetApkFromFileManager()
+    /// <summary>
+    /// 从手机的文件管理器中，获取apk文件，并放到persistent目录下
+    /// </summary>
+    void GetApkFromFileManager()
     {
         string files = Application.streamingAssetsPath.Replace("jar:", "");
         files = files.Replace("!/assets", "");
         using (WWW www = new WWW(files))
         {
-            yield return www;
+            while (!www.isDone)
+            {
+                Debug.Log("GetApkFromFileManager:\n=================\n" + www.progress + "\n=================\n");
+            }
+
             Debug.Log("\n==================\n==================\n" + Application.streamingAssetsPath + "\n/data/app/" + "\n==================\n==================\n");
             if (www.isDone)
             {
                 Debug.Log("\n==================\n==================\n" + Application.streamingAssetsPath + "\n" + files + "\n==================\n==================\n");
                 FileStream output = new FileStream(Application.persistentDataPath + "/base.apk", FileMode.Create, FileAccess.Write);
                 byte[] buffer = www.bytes;
+                APKMD5 = EncryptProvider.Md5(Encoding.UTF8.GetString(buffer));
+                Debug.Log("\n=======================\n" + APKMD5 + "\n=======================\n");
                 output.Write(buffer, 0, buffer.Length);
                 output.Close();
                 output.Dispose();
             }
         }
     }
+
+
 }

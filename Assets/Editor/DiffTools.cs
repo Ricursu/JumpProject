@@ -25,6 +25,7 @@ public class DiffUtils
         using (FileStream target = new FileStream(Path + "/new.apk", FileMode.Open, FileAccess.Read))
         {
             byte[] buffer = new byte[dict.Length];
+            dict.Read(buffer, 0, (int)dict.Length);
             string md5 = Encoding.UTF8.GetString(buffer);
             md5 = EncryptProvider.Md5(md5);
 

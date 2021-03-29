@@ -140,8 +140,6 @@ public class LuaResLoader : LuaFileUtils
         if (Application.platform != RuntimePlatform.Android)
             return null;
 
-
-        //Debug.Log("\n====================\n====================\n UpDate:" + fileName + "\n=========================\n=========================\n");
         if (!fileName.EndsWith(".lua"))
         {
             fileName += ".lua";
@@ -151,12 +149,14 @@ public class LuaResLoader : LuaFileUtils
         string path = "UpData/" + fileName;
         TextAsset text = Resources.Load(path, typeof(TextAsset)) as TextAsset;
 
+        Debug.Log("Read " + path + ":\n===============\n" + fileName + "\n===============\n");
         if (text != null)
         {
+            Debug.Log("Read:\n ===============\n" + fileName + "\n===============\n");
             buffer = text.bytes;
             Resources.UnloadAsset(text);
         }
-
+        Debug.Log("Updata:\n ===============\n" + buffer + "\n===============\n");
         return buffer;
     }
 
