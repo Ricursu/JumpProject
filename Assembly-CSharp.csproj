@@ -73,10 +73,12 @@
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
     <Compile Include="Assets\Scripts\BoxControl.cs" />
     <Compile Include="Assets\Scripts\HotUpdate.cs" />
+    <Compile Include="Assets\Scripts\HttpDownLoad.cs" />
     <Compile Include="Assets\Scripts\LoadFromFile.cs" />
     <Compile Include="Assets\Scripts\Login.cs" />
     <Compile Include="Assets\Scripts\LuaManager.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Test.cs" />
     <Compile Include="Assets\Scripts\TestPlayer.cs" />
     <Compile Include="Assets\Scripts\UIEvent.cs" />
     <Compile Include="Assets\Scripts\Util.cs" />
