@@ -14,7 +14,7 @@
       <file leaf-file-name="Player.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lua/Player.lua">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
+            <state relative-caret-position="1100">
               <caret line="44" column="39" selection-start-line="44" selection-start-column="39" selection-end-line="44" selection-end-column="39" />
             </state>
           </provider>
@@ -29,11 +29,25 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Login.lua" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/StreamingAssets/Lua/Login.lua">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
       <file leaf-file-name="tolua.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ToLua/Lua/tolua.lua">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
               <caret line="18" column="13" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.lua" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/StreamingAssets/Lua/Main.lua">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="12" column="29" lean-forward="true" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -47,11 +61,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Continue.lua" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Lua/Continue.lua">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
       <file leaf-file-name="Login.lua" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lua/Login.lua">
           <provider selected="true" editor-type-id="text-editor">
@@ -61,7 +70,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SkipList.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SkipList.txt" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Downloads/xLua-master/Unity Project 2/Assets/Resources/Script/SkipList.txt">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -119,27 +128,20 @@
             <path>
               <item name="Assets" type="b2602c69:ProjectViewProjectNode" />
               <item name="Assets" type="462c0819:PsiDirectoryNode" />
-              <item name="ToLua" type="462c0819:PsiDirectoryNode" />
+              <item name="StreamingAssets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Assets" type="b2602c69:ProjectViewProjectNode" />
               <item name="Assets" type="462c0819:PsiDirectoryNode" />
-              <item name="ToLua" type="462c0819:PsiDirectoryNode" />
+              <item name="StreamingAssets" type="462c0819:PsiDirectoryNode" />
               <item name="Lua" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Assets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Assets" type="462c0819:PsiDirectoryNode" />
-              <item name="ToLua" type="462c0819:PsiDirectoryNode" />
-              <item name="Lua" type="462c0819:PsiDirectoryNode" />
-              <item name="misc" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -197,6 +199,57 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Lua/Player.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1100">
+          <caret line="44" column="39" selection-start-line="44" selection-start-column="39" selection-end-line="44" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lua/BoxController.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ToLua/Lua/tolua.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ToLua/Lua/misc/functions.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1350">
+          <caret line="54" column="20" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lua/Continue.lua">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lua/Login.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lua/Main.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lua/Continue.lua.meta">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/xLua-master/Unity Project 2/Assets/Resources/Script/SkipList.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/Lua/Player.lua">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1100">
@@ -307,19 +360,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lua/Main.lua">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Lua/Player.lua">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
+        <state relative-caret-position="1100">
           <caret line="44" column="39" selection-start-line="44" selection-start-column="39" selection-end-line="44" selection-end-column="39" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/xLua-master/Unity Project 2/Assets/Resources/Script/SkipList.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Lua/Login.lua">
       <provider selected="true" editor-type-id="text-editor">
@@ -328,8 +377,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Downloads/xLua-master/Unity Project 2/Assets/Resources/Script/SkipList.txt">
+    <entry file="file://$PROJECT_DIR$/Lua/Main.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StreamingAssets/Lua/Login.lua">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/StreamingAssets/Lua/Main.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="12" column="29" lean-forward="true" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

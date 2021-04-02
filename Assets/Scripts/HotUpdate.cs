@@ -23,26 +23,10 @@ public class HotUpdate : MonoBehaviour
         //string packageName = "com." + Application.companyName + "." + Application.productName;
 
         GetApkFromFileManager();
-        Debug.Log("\n=======================\n" + APKMD5 + "\n=======================\n");
-        WebUtils.GetFileFromServer(APKMD5);
-        DiffUtils.ReductionApk("/reduction.apk", "/base.apk", "/Android/Lua/" + APKMD5);
-
-
-        ///全量更新
-        //UnZipTool.CreateVersionFile()
-        //StartCoroutine(ReadAssetBundle("VERSION"));
-        //string[] downloadList = FileUtils.ReadFileLines(Application.persistentDataPath + "/Android/Lua/VERSION");
-        //foreach(string str in downloadList)
-        //{
-        //    string temp = str;
-        //    Debug.Log("                                        " + temp + "                                        ");
-        //    temp = temp.Replace('[', ' ');
-        //    temp = temp.Replace(']', ' ');
-        //    temp = temp.Trim();
-        //    Debug.Log("                                        " + temp + "                                        ");
-        //    StartCoroutine(ReadAssetBundle(temp + ".zip"));
-        //}
-        //StartCoroutine(ReadAssetBundle("luascript.unity3d.manifest"));
+        WebUtils.GetFileFromServer("version.zip");
+        //UnZipTool.UnZipApk(Application.persistentDataPath + "/base.apk");
+        //UnZipTool.UnZip("version.zip");
+        DiffUtils.ReductionFile(Path.Combine(Application.persistentDataPath, "assets/Lua"), Path.Combine(Application.persistentDataPath, "version/filelist.txt"));
     }
 
     /// <summary>
@@ -102,7 +86,7 @@ public class HotUpdate : MonoBehaviour
                 Debug.Log("\n==================\n==================\n" + Application.streamingAssetsPath + "\n" + files + "\n==================\n==================\n");
                 FileStream output = new FileStream(Application.persistentDataPath + "/base.apk", FileMode.Create, FileAccess.Write);
                 byte[] buffer = www.bytes;
-                APKMD5 = EncryptProvider.Md5(Encoding.UTF8.GetString(buffer));
+                //APKMD5 = EncryptProvider.Md5(Encoding.UTF8.GetString(buffer));
                 Debug.Log("\n=======================\n" + APKMD5 + "\n=======================\n");
                 output.Write(buffer, 0, buffer.Length);
                 output.Close();

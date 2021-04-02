@@ -149,14 +149,11 @@ public class LuaResLoader : LuaFileUtils
         string path = "UpData/" + fileName;
         TextAsset text = Resources.Load(path, typeof(TextAsset)) as TextAsset;
 
-        Debug.Log("Read " + path + ":\n===============\n" + fileName + "\n===============\n");
         if (text != null)
         {
-            Debug.Log("Read:\n ===============\n" + fileName + "\n===============\n");
             buffer = text.bytes;
             Resources.UnloadAsset(text);
         }
-        Debug.Log("Updata:\n ===============\n" + buffer + "\n===============\n");
         return buffer;
     }
 
@@ -185,8 +182,6 @@ public class LuaResLoader : LuaFileUtils
             {
                 InitAssetBundle(path + "/luascript.unity3d");
                 buffer = Encoding.UTF8.GetBytes(assetBundle.LoadAsset<TextAsset>(Path.GetFileName(fileName)).text);
-                if (fileName.Contains("Login"))
-                    Debug.Log(buffer.ToString() + "    " + assetBundle.LoadAsset<TextAsset>(Path.GetFileName(fileName)).text);
             }
             catch (Exception e)
             {

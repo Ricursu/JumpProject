@@ -36,13 +36,13 @@ public class UnZipTool : MonoBehaviour
     {
         Debug.Log("========================== \n  UNZIP UNZIP UNZIP UNZIP  \n==========================");
 
-        string path = Application.persistentDataPath + "/Android/Lua/" + zipname;    // "/Android/Lua/version.zip"; // "D://Zip/version.zip";
+        string path = Path.Combine(Application.persistentDataPath, zipname);    // "/Android/Lua/version.zip"; // "D://Zip/version.zip";
         string deletefile = path;
         ZipInputStream zipInput = new ZipInputStream(File.OpenRead(path));
         ZipEntry entry;
 
         Debug.Log(zipname.Substring(0, zipname.LastIndexOf('.')));
-        path = Application.persistentDataPath + "/Android/Lua/" + zipname.Substring(0, zipname.LastIndexOf('.')) + "/"; // "D://Zip/version/";
+        path = path.Replace(".zip", ""); // "D://Zip/version/";
         if (Directory.Exists(path))
             Directory.Delete(path, true);
         Directory.CreateDirectory(path);
@@ -54,9 +54,47 @@ public class UnZipTool : MonoBehaviour
             zipInput.Read(buffer, (int)entry.Offset, (int)entry.Size);
 
             //将解压的文件写到磁盘中
-            FileUtils.CreateFile(path + entry.Name, buffer);
+            FileUtils.CreateFile(Path.Combine(path, entry.Name), buffer);
         }
         Debug.Log("========================== \n  DELETEFILE DELETEFILE DELETEFILE DELETEFILE \n==========================\n" + deletefile);
         File.Delete(deletefile);
+    }
+
+    public static void UnZipApk(string path)
+    {
+        try
+        {
+            Debug.Log(path);
+            ZipInputStream zipInput = new ZipInputStream(File.OpenRead(path));
+            ZipEntry entry;
+            while ((entry = zipInput.GetNextEntry()) != null)
+            {
+                byte[] buffer = new byte[entry.Size + 1];
+                string directoryName = Path.GetDirectoryName(entry.Name);
+                string fileName = Path.GetFileName(entry.Name);
+
+                zipInput.Read(buffer, (int)entry.Offset, (int)entry.Size);
+
+                path = Application.persistentDataPath;
+                path = Path.Combine(path, directoryName);
+                if (!path.Contains("Lua"))
+                    continue;
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+
+                path = Path.Combine(path, fileName);
+                FileInfo fileInfo = new FileInfo(path);
+                Debug.Log(path);
+                FileStream fs = fileInfo.Create();
+                fs.Write(buffer, 0, buffer.Length);
+                fs.Flush();
+                fs.Close();
+                fs.Dispose();
+            }
+        }
+        catch(Exception e)
+        {
+            Debug.LogError(e.GetType() + "" + e.GetBaseException());
+        }
     }
 }

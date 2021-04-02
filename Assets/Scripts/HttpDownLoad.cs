@@ -47,8 +47,8 @@ public class HttpDownLoad {
 			long fileLength = fs.Length;
 
             HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
-            Stream stream = request.GetResponse().GetResponseStream();
             request.AddRange(fileLength);
+            Stream stream = request.GetResponse().GetResponseStream();
 
             //获取下载文件的总长度
             Debug.Log(fileLength);
@@ -61,7 +61,7 @@ public class HttpDownLoad {
 			{
 				
 				//断点续传核心，设置本地文件流的起始位置
-				fs.Seek(fileLength, SeekOrigin.Begin);
+				fs.Seek(fileLength, SeekOrigin.Current);
 
 
 				//request.Method = "POST";
@@ -111,20 +111,52 @@ public class HttpDownLoad {
 
 	public void ThreadDownLoad(string url, string savePath, string saveName = "/test")
     {
+		long fileLength = 0;
+		long netFileLength = 0;
+
 		if (!Directory.Exists(savePath))
 			Directory.CreateDirectory(savePath);
 
 		HttpWebRequest request = HttpWebRequest.Create(url) as HttpWebRequest;
 
-		FileStream fileStream = new FileStream(savePath + saveName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-		long fileLength = fileStream.Length;
-		fileStream.Seek(fileLength, SeekOrigin.Begin);
+		FileStream fileStream = null;
+        if (File.Exists(savePath + saveName))
+        {
+			fileStream = File.OpenWrite(savePath + saveName);
+			fileLength = fileStream.Length;
+			fileStream.Seek(fileLength, SeekOrigin.Current);
+        }
+        else
+        {
+			fileStream = new FileStream(savePath + saveName, FileMode.Create, FileAccess.Write);
+        }
 
-        long webFileLength = GetLength(url);
 		request.AddRange(fileLength);
-        Stream stream = request.GetResponse().GetResponseStream();
 
-		ServicePointManager.ServerCertificateValidationCallback
+		HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+		Stream responseStream = response.GetResponseStream();
+		netFileLength = response.ContentLength;
+
+		byte[] buffer = new byte[1024];
+		int len = -1;
+        while (true)
+        {
+			len = responseStream.Read(buffer, 0, buffer.Length);
+			if (len > 0)
+			{
+				if (isStop)
+					break;
+				fileStream.Write(buffer, 0, len);
+				fileLength += len;
+			}
+			else
+			{
+				break;
+			}
+        }
+		response.Close();
+		responseStream.Close();
+		responseStream.Dispose();
 
     }
 

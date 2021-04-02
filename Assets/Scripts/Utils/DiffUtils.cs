@@ -8,14 +8,31 @@ using VCDiff.Includes;
 
 public class DiffUtils
 {
-    public static bool ReductionApk(string newApkPath, string oldApkPath, string diffPath)
+    public static void ReductionFile(string luaPath, string listFilePath)
     {
-        string Path = Application.persistentDataPath;
+        string[] files = File.ReadAllLines(listFilePath);
+        foreach(string fileName in files)
+        {
+            if (fileName.Length < 5)
+                break;
+            string[] fileInfo = fileName.Split(',');
+            string luaFile = fileInfo[0] + ".lua";
+            //Debug.Log("\n===========================\n" + listFilePath + luaFile + "\n" + luaPath + luaFile + "\n" + fileName + "\n===========================\n");
+            Debug.LogError("\n==============\n" + fileInfo[0] + fileInfo[1] + "\n==============\n");
+            string reductionPath = Path.Combine(Path.GetDirectoryName(listFilePath), luaFile);
+            string oldFilePath = Path.Combine(luaPath, luaFile);
+            string diffFilePath = Path.Combine(Path.GetDirectoryName(listFilePath), fileInfo[1]);
+            Reduction(reductionPath, oldFilePath, diffFilePath);
+        }
+    }
+
+    public static bool Reduction(string reductionPath, string oldFilePath, string diffFilePath)
+    {
         try
         {
-            using (FileStream output = new FileStream(Path + newApkPath, FileMode.Create, FileAccess.Write))             //旧apk包打入差分文件后的新apk包
-            using (FileStream dict = new FileStream(Path + oldApkPath, FileMode.Open, FileAccess.Read))                     //旧版apk包
-            using (FileStream target = new FileStream(Path + diffPath, FileMode.Open, FileAccess.Read))                //差分包
+            using (FileStream output = new FileStream(reductionPath, FileMode.Create, FileAccess.Write))             //旧apk包打入差分文件后的新apk包
+            using (FileStream dict = new FileStream(oldFilePath, FileMode.Open, FileAccess.Read))                     //旧版apk包
+            using (FileStream target = new FileStream(diffFilePath, FileMode.Open, FileAccess.Read))                //差分包
             {
                 VCDecoder decoder = new VCDecoder(dict, target, output);
 

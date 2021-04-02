@@ -18,22 +18,25 @@ public class ZipTools
     static void ZipStreamingAsset()
     {
         string zipname = HotUpdate.mReleaseVersion + "." + HotUpdate.mMajorVersion + "." + HotUpdate.mMinorVersion;
-        //获取streamingAsset下的所有文件
-        string[] files = Directory.GetFiles(Application.streamingAssetsPath);
+        //获取path下的所有文件
+        string path = "D://Apk/Diff";
+        string[] files = Directory.GetFiles(path);
         List<string> fileList = new List<string>();
         //筛选需要压缩的文件
-        foreach (string name in files)
-        {
-            if (!name.EndsWith(".meta") && Path.GetFileName(name).Contains("unity3d"))
-                fileList.Add(name);
-        }
+        //foreach (string name in files)
+        //{
+        //    if (!name.EndsWith(".meta") && Path.GetFileName(name).Contains("unity3d"))
+        //        fileList.Add(name);
+        //}
         //创建压缩文件输出流
-        ZipOutputStream zipOutputStream = new ZipOutputStream(File.Create(Application.streamingAssetsPath + "/VERSION" + zipname + ".zip"));
+        if (File.Exists(path + "/version" + zipname + ".zip"))
+            File.Delete(path + "/version" + zipname + ".zip");
+        ZipOutputStream zipOutputStream = new ZipOutputStream(File.Create(path + "/version.zip"));   //" + zipname + "
         zipOutputStream.SetLevel(6);
 
         //创建压缩文件版本文件
-        string versionFileName = "VERSION" + zipname + ".txt";
-        versionFileName = Application.streamingAssetsPath + "/" + versionFileName;
+        string versionFileName = "version.txt";
+        versionFileName = path + "/" + versionFileName;
         if (File.Exists(versionFileName))
             File.Delete(versionFileName);
 
@@ -41,7 +44,7 @@ public class ZipTools
         //CreateVersionFile(versionFileName, "version:" + zipname);
 
         //将筛选后文件件写入压缩的输出流中
-        foreach (string name in fileList)
+        foreach (string name in files)
         {
             bool result = CreateZipFile(versionFileName, name, zipOutputStream);
             if (result == false)
@@ -85,7 +88,7 @@ public class ZipTools
         }
         catch(Exception e)
         {
-            Debug.Log(e.StackTrace);
+            Debug.Log(e.GetType() + "" + e.GetBaseException() +  e.StackTrace);
             return false;
         }
         finally
@@ -125,20 +128,26 @@ public class ZipTools
     static void UnZip()
     {
         Debug.Log("UnZip");
-        string path = "D://Zip/version.zip";
+        string path = "D://Apk/new.apk";
         ZipInputStream zipInput = new ZipInputStream(File.OpenRead(path));
         ZipEntry entry;
         while((entry = zipInput.GetNextEntry()) != null)
         {
             byte[] buffer = new byte[entry.Size + 1];
-            Debug.Log(entry.Name);
+            string directoryName = Path.GetDirectoryName(entry.Name);
+            string fileName = Path.GetFileName(entry.Name);
+
             zipInput.Read(buffer, (int)entry.Offset, (int)entry.Size);
 
-            path = "D://Zip/version/";
+            path = "D://Apk/new/";
+            path = Path.Combine(path, directoryName);
+            if (!path.Contains("Lua"))
+                continue;
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
-            FileInfo fileInfo = new FileInfo(path + entry.Name);
+            path = Path.Combine(path, fileName);
+            FileInfo fileInfo = new FileInfo(path);
             Debug.Log(path);
             FileStream fs = fileInfo.Create();
             fs.Write(buffer, 0, buffer.Length);

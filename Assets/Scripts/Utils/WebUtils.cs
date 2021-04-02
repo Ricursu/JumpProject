@@ -42,10 +42,10 @@ public class WebUtils
 
             if (Application.platform == RuntimePlatform.Android)
             {
-                string savePath = Application.persistentDataPath + "/Android/Lua/";
+                string savePath = Application.persistentDataPath;
                 if (!Directory.Exists(savePath))
                     Directory.CreateDirectory(savePath);
-                FileUtils.CreateFile(savePath + filename, bytes);
+                FileUtils.CreateFile(Path.Combine(savePath, filename), bytes);
 
             }
 #if UNITY_EDITOR
