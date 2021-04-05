@@ -62,11 +62,14 @@ public class UnZipTool : MonoBehaviour
 
     public static void UnZipApk(string path)
     {
+        ZipInputStream zipInput = null;
+        ZipEntry entry = null;
+        string apkPath = null;
         try
         {
             Debug.Log(path);
-            ZipInputStream zipInput = new ZipInputStream(File.OpenRead(path));
-            ZipEntry entry;
+            zipInput = new ZipInputStream(File.OpenRead(path));
+            apkPath = path;
             while ((entry = zipInput.GetNextEntry()) != null)
             {
                 byte[] buffer = new byte[entry.Size + 1];
@@ -86,7 +89,7 @@ public class UnZipTool : MonoBehaviour
                 FileInfo fileInfo = new FileInfo(path);
                 Debug.Log(path);
                 FileStream fs = fileInfo.Create();
-                fs.Write(buffer, 0, buffer.Length);
+                fs.Write(buffer, 0, buffer.Length - 1);
                 fs.Flush();
                 fs.Close();
                 fs.Dispose();
@@ -95,6 +98,16 @@ public class UnZipTool : MonoBehaviour
         catch(Exception e)
         {
             Debug.LogError(e.GetType() + "" + e.GetBaseException());
+        }
+        finally
+        {
+            if(zipInput != null)
+            {
+                zipInput.Dispose();
+                zipInput.Close();
+            }
+            if(apkPath != null)
+                File.Delete(apkPath);
         }
     }
 }

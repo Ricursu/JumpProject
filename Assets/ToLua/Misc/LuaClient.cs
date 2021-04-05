@@ -167,7 +167,7 @@ public class LuaClient : MonoBehaviour
         LuaCoroutine.Register(luaState, this);        
     }
 
-    protected void Init()
+    public void Init()
     {
         //InitLoader();
         new LuaResLoader();
@@ -290,5 +290,10 @@ public class LuaClient : MonoBehaviour
             profiler.Dispose();
             LuaProfiler.Clear();
         }
+    }
+
+    public void RestartLuaState()
+    {
+        Destroy();
     }
 }

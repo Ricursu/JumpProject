@@ -41,13 +41,18 @@ public class FileUtils
         return true;
     }
 
+    /// <summary>
+    /// 创建新的文件，并写入数据
+    /// </summary>
+    /// <param name="filename">创建的文件名</param>
+    /// <param name="buffer">写入的数据的字节流</param>
+    /// <returns></returns>
     public static bool CreateFile(string filename, byte[] buffer)
     {
         FileStream fs = null;
         try
         {
-            FileInfo fileInfo = new FileInfo(filename);
-            fs = fileInfo.Create();
+            fs = new FileStream(filename, FileMode.CreateNew, FileAccess.Write);
             fs.Write(buffer, 0, buffer.Length);
         }catch(Exception e)
         {
@@ -56,13 +61,21 @@ public class FileUtils
         }
         finally
         {
-            fs.Flush();
-            fs.Close();
-            fs.Dispose();
+            if (fs != null)
+            {
+                fs.Flush();
+                fs.Close();
+                fs.Dispose();
+            }
         }
         return true;
     }
 
+    /// <summary>
+    /// 按行读取文件的所有信息
+    /// </summary>
+    /// <param name="filename"></param>
+    /// <returns></returns>
     public static string[] ReadFileLines(string filename)
     {
         string[] content = null;
@@ -75,6 +88,33 @@ public class FileUtils
             Debug.Log(e.GetType() + " " + e.GetBaseException());
         }
         return content;
+    }
+
+
+    public static byte[] ReadFileBytes(string filename)
+    {
+        byte[] buffer = null;
+        FileStream input = null;
+        try
+        {
+            input = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            buffer = new byte[input.Length];
+            input.Read(buffer, 0, buffer.Length);
+        }
+        catch
+        {
+            return null;
+        }
+        finally
+        {
+            if (input != null)
+            {
+                input.Dispose();
+                input.Close();
+            }
+        }
+
+        return buffer;
     }
 
 }

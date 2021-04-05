@@ -8,6 +8,9 @@ ScriptsOnlyBuild:
     - TestPlayer
     DOTween.dll:
     - DG.Tweening.Core.DOTweenSettings
+    Unity.Mobile.AndroidLogcat.Editor.dll:
+    - Unity.Android.Logcat.AndroidLogcatConsoleWindow
+    - Unity.Android.Logcat.AndroidLogcatManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.TestRunner.dll:
@@ -57,21 +60,21 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11188}
+      Script: {instanceID: 11192}
     - Class: 114
-      Script: {instanceID: 11412}
+      Script: {instanceID: 11422}
     - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11472}
     - Class: 114
-      Script: {instanceID: 11478}
+      Script: {instanceID: 11488}
     - Class: 114
-      Script: {instanceID: 11954}
+      Script: {instanceID: 11974}
     - Class: 114
-      Script: {instanceID: 12512}
+      Script: {instanceID: 12546}
     - Class: 114
-      Script: {instanceID: 13136}
+      Script: {instanceID: 13182}
     - Class: 114
-      Script: {instanceID: 13594}
+      Script: {instanceID: 13652}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -132,31 +135,31 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11188}
+      Script: {instanceID: 11192}
     - Class: 114
-      Script: {instanceID: 11412}
+      Script: {instanceID: 11422}
     - Class: 114
-      Script: {instanceID: 11462}
+      Script: {instanceID: 11472}
     - Class: 114
-      Script: {instanceID: 11478}
+      Script: {instanceID: 11488}
     - Class: 114
-      Script: {instanceID: 11644}
+      Script: {instanceID: 11656}
     - Class: 114
-      Script: {instanceID: 11954}
+      Script: {instanceID: 11974}
     - Class: 114
-      Script: {instanceID: 12198}
+      Script: {instanceID: 12222}
     - Class: 114
-      Script: {instanceID: 12354}
+      Script: {instanceID: 12382}
     - Class: 114
-      Script: {instanceID: 12384}
+      Script: {instanceID: 12414}
     - Class: 114
-      Script: {instanceID: 12512}
+      Script: {instanceID: 12546}
     - Class: 114
-      Script: {instanceID: 13026}
+      Script: {instanceID: 13072}
     - Class: 114
-      Script: {instanceID: 13136}
+      Script: {instanceID: 13182}
     - Class: 114
-      Script: {instanceID: 13594}
+      Script: {instanceID: 13652}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -878,4 +881,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/Jump.unity
-  playerPath: D:/APK/old.apk
+  playerPath: D:/Apk/new.apk

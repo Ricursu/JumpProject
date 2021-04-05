@@ -1,9 +1,7 @@
 --主入口函数。从这里开始lua逻辑
 --全局变量
 function Main()
-	Debugger.Log("\nMain: \n=================\n 旧的Main.lua \n===================")
-	Debugger.Log("\nMain: \n=================\n 旧的Main.lua \n===================")
-	Debugger.Log("\nMain: \n=================\n 旧的Main.lua \n===================")
+	Debugger.Log("\nMain: \n=================\n 新的Main.lua \n===================")
 	GameObject = UnityEngine.GameObject
 	Transform = UnityEngine.Transform
 	ParticleSystem = UnityEngine.ParticleSystem
@@ -28,4 +26,5 @@ function OnLevelWasLoaded(level)
 end
 
 function OnApplicationQuit()
+
 end

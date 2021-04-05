@@ -46,8 +46,8 @@ public class DiffUtils
     [MenuItem("VCDiff/Build File Diff")]
     public static void DoFileEncode()
     {
-        string oldApkPath = "D://APK/new/assets/Lua/";
-        string newApkPath = "D://APK/old/assets/Lua/";
+        string oldApkPath = "D://APK/old/assets/Lua/";
+        string newApkPath = "D://APK/new/assets/Lua/";
         string[] oldFile = Directory.GetFiles(oldApkPath);
         string[] newFile = Directory.GetFiles(newApkPath);
         string diffPath = "D://Apk/Diff/";
@@ -100,10 +100,15 @@ public class DiffUtils
     public static void DoDecode()
     {
         string Path = "D://APK";
-        using (FileStream output = new FileStream(Path + "/newapk.apk", FileMode.Create, FileAccess.Write))
-        using (FileStream dict = new FileStream(Path + "/old.apk", FileMode.Open, FileAccess.Read))
-        using (FileStream target = new FileStream(Path + "/patch.diff", FileMode.Open, FileAccess.Read))
+        using (FileStream output = new FileStream(Path + "/main.lua", FileMode.Create, FileAccess.Write))
+        using (FileStream dict = new FileStream(Path + "/old/assets/Lua/Main.lua", FileMode.Open, FileAccess.Read))
         {
+            byte[] buffer = new byte[dict.Length];
+            dict.Read(buffer, 0, buffer.Length);
+            string md5s = EncryptProvider.Md5(Encoding.UTF8.GetString(buffer));
+            Debug.LogError(md5s);
+            FileStream target = new FileStream(Path + "/Diff/" + md5s, FileMode.Open, FileAccess.Read);
+
             VCDecoder decoder = new VCDecoder(dict, target, output);
 
             VCDiffResult result = decoder.Start();

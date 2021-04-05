@@ -17,7 +17,7 @@ public class ZipTools
     [MenuItem("Zip/Build Zip")]
     static void ZipStreamingAsset()
     {
-        string zipname = HotUpdate.mReleaseVersion + "." + HotUpdate.mMajorVersion + "." + HotUpdate.mMinorVersion;
+        string zipname = HotUpdate.mReleaseVersion + "." + HotUpdate.mMajorVersion;
         //获取path下的所有文件
         string path = "D://Apk/Diff";
         string[] files = Directory.GetFiles(path);
@@ -29,8 +29,8 @@ public class ZipTools
         //        fileList.Add(name);
         //}
         //创建压缩文件输出流
-        if (File.Exists(path + "/version" + zipname + ".zip"))
-            File.Delete(path + "/version" + zipname + ".zip");
+        if (File.Exists(path + "/" + zipname + ".zip"))
+            File.Delete(path + "/" + zipname + ".zip");
         ZipOutputStream zipOutputStream = new ZipOutputStream(File.Create(path + "/version.zip"));   //" + zipname + "
         zipOutputStream.SetLevel(6);
 
@@ -39,8 +39,6 @@ public class ZipTools
         versionFileName = path + "/" + versionFileName;
         if (File.Exists(versionFileName))
             File.Delete(versionFileName);
-
-        FileUtils.WriteFileAppend(versionFileName, "version:" + zipname);
         //CreateVersionFile(versionFileName, "version:" + zipname);
 
         //将筛选后文件件写入压缩的输出流中
@@ -54,7 +52,7 @@ public class ZipTools
         zipOutputStream.Finish();
         zipOutputStream.Close();
 
-        FileUtils.WriteFileAppend(Application.streamingAssetsPath + "/VERSION", "[VERSION" + zipname + "]");
+        FileUtils.WriteFileAppend(Path.Combine(path, "version.txt"), "version = " + zipname);
     }
 
     /// <summary>
@@ -80,8 +78,8 @@ public class ZipTools
             zipOutputStream.Write(buffer, 0, buffer.Length);
             Debug.Log(filename + "   " + Crc32.ComputeChecksum(buffer));
 
-            FileUtils.WriteFileAppend(versionFileName, Convert.ToString(Path.GetFileName(filename) + " - CRC:" + Crc32.ComputeChecksum(buffer)));
-            FileUtils.WriteFileAppend(versionFileName, Path.GetFileName(filename) + " - MD5:" + EncryptProvider.Md5(Encoding.UTF8.GetString(buffer)));
+            //FileUtils.WriteFileAppend(versionFileName, Convert.ToString(Path.GetFileName(filename) + " - CRC:" + Crc32.ComputeChecksum(buffer)));
+            //FileUtils.WriteFileAppend(versionFileName, Path.GetFileName(filename) + " - MD5:" + EncryptProvider.Md5(Encoding.UTF8.GetString(buffer)));
 
             //CreateVersionFile(versionFileName, Convert.ToString(Path.GetFileName(filename) + " - CRC:" + Crc32.ComputeChecksum(buffer)));
             //CreateVersionFile(versionFileName, Path.GetFileName(filename) + " - MD5:" + EncryptProvider.Md5(Encoding.UTF8.GetString(buffer)));
@@ -128,7 +126,7 @@ public class ZipTools
     static void UnZip()
     {
         Debug.Log("UnZip");
-        string path = "D://Apk/new.apk";
+        string path = "D://Apk/old.apk";
         ZipInputStream zipInput = new ZipInputStream(File.OpenRead(path));
         ZipEntry entry;
         while((entry = zipInput.GetNextEntry()) != null)
@@ -139,7 +137,7 @@ public class ZipTools
 
             zipInput.Read(buffer, (int)entry.Offset, (int)entry.Size);
 
-            path = "D://Apk/new/";
+            path = "D://Apk/old/";
             path = Path.Combine(path, directoryName);
             if (!path.Contains("Lua"))
                 continue;
@@ -147,13 +145,31 @@ public class ZipTools
                 Directory.CreateDirectory(path);
 
             path = Path.Combine(path, fileName);
-            FileInfo fileInfo = new FileInfo(path);
-            Debug.Log(path);
-            FileStream fs = fileInfo.Create();
-            fs.Write(buffer, 0, buffer.Length);
+            Debug.Log(Encoding.UTF8.GetString(buffer));
+            buffer = Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(buffer));
+            FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+            fs.Write(buffer, 0, buffer.Length - 1);
             fs.Flush();
-            fs.Close();
             fs.Dispose();
+            fs.Close();
         }
     }
+
+    [MenuItem("Zip/Log String")]
+    public static void LogString()
+    {
+        string str = Encoding.UTF8.GetString(WebUtils.GetByteFromServer("version.txt"));
+        Debug.Log(str);
+        string[] strInfo = str.Split('=');
+        foreach (string s in strInfo)
+            Debug.Log(s);
+        //Debug.Log(WebUtils.IsExistFileInServer("http://192.168.3.30/1.1.zip"));
+
+
+        //string str = "version = 1.1";
+        //string[] strInfo = str.Split('=');
+        //foreach (string s in strInfo)
+        //    Debug.Log(s.Trim());
+    }
+
 }

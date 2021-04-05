@@ -1,4 +1,5 @@
 ﻿using NETCore.Encrypt;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -10,8 +11,7 @@ public class HotUpdate : MonoBehaviour
 {
     // Start is called before the first frame update
     public static int mReleaseVersion = 1;
-    public static int mMajorVersion = 1;
-    public static int mMinorVersion = 3;
+    public static int mMajorVersion = 2;
 
     public static string APKMD5 = "";
 
@@ -21,12 +21,38 @@ public class HotUpdate : MonoBehaviour
     void Awake()
     {
         //string packageName = "com." + Application.companyName + "." + Application.productName;
+        CreateVersionFile();
+        if (!IsUpdate())
+            return;
 
-        GetApkFromFileManager();
+        if(!Directory.Exists(Path.Combine(Application.persistentDataPath,"assets")))
+        {
+            GetApkFromFileManager();
+            UnZipTool.UnZipApk(Application.persistentDataPath + "/base.apk");
+        }
+
         WebUtils.GetFileFromServer("version.zip");
-        //UnZipTool.UnZipApk(Application.persistentDataPath + "/base.apk");
-        //UnZipTool.UnZip("version.zip");
+        UnZipTool.UnZip("version.zip");
         DiffUtils.ReductionFile(Path.Combine(Application.persistentDataPath, "assets/Lua"), Path.Combine(Application.persistentDataPath, "version/filelist.txt"));
+
+        //todo 更新本地版本文件version.ini的内容
+        FileUtils.CreateFile(Path.Combine(Application.persistentDataPath, "config.ini"), WebUtils.GetByteFromServer("version.txt"));
+    }
+
+    /// <summary>
+    /// 判断是否需要更新
+    /// 通过获取服务器版本文件和本地版本文件进行比较
+    /// </summary>
+    /// <returns></returns>
+    private bool IsUpdate()
+    {
+        string serverVersion = Encoding.UTF8.GetString(WebUtils.GetByteFromServer("version.txt"));
+        string localVersion = Encoding.UTF8.GetString(FileUtils.ReadFileBytes(Path.Combine(Application.persistentDataPath, "config.ini")));
+        string[] serverInfo = serverVersion.Split('=');
+        string[] localInfo = localVersion.Split('=');
+        if (serverInfo[1].Trim() == localInfo[1].Trim())
+            return false;
+        return true;
     }
 
     /// <summary>
@@ -95,5 +121,17 @@ public class HotUpdate : MonoBehaviour
         }
     }
 
+    void CreateVersionFile()
+    {
+        string filename = Path.Combine(Application.persistentDataPath, "config.ini");
+        if (File.Exists(filename))
+            return;
+        string content = "version = " + mReleaseVersion + "." + mMajorVersion;
+        FileStream output = new FileStream(filename, FileMode.Create, FileAccess.Write);
+        byte[] buffer = Encoding.UTF8.GetBytes(content);
+        output.Write(buffer, 0, buffer.Length);
+        output.Dispose();
+        output.Close();
+    }
 
 }

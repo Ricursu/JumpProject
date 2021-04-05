@@ -46,10 +46,10 @@ public class LuaResLoader : LuaFileUtils
         {
             buffer = ReadUpDateFile(fileName);
         }
-        if (buffer == null)
-        {
-            buffer = ReadPersistentFile(fileName);
-        } 
+        //if (buffer == null)
+        //{
+        //    buffer = ReadPersistentFile(fileName);
+        //} 
         if (buffer == null)
         {
             buffer = ReadDownLoadFile(fileName);
@@ -70,10 +70,10 @@ public class LuaResLoader : LuaFileUtils
         {
             buffer = ReadUpDateFile(fileName);
         }
-        if (buffer == null)
-        {
-            buffer = ReadPersistentFile(fileName);
-        }
+        //if (buffer == null)
+        //{
+        //    buffer = ReadPersistentFile(fileName);
+        //}
         if (buffer == null)
         {
             buffer = base.ReadFile(fileName);
@@ -146,14 +146,12 @@ public class LuaResLoader : LuaFileUtils
         }
 
         byte[] buffer = null;
-        string path = "UpData/" + fileName;
-        TextAsset text = Resources.Load(path, typeof(TextAsset)) as TextAsset;
-
-        if (text != null)
-        {
-            buffer = text.bytes;
-            Resources.UnloadAsset(text);
-        }
+        string path = Path.Combine(Application.persistentDataPath, "version", fileName);
+        if (!File.Exists(path))
+            return buffer;
+        string content = Encoding.UTF8.GetString(FileUtils.ReadFileBytes(path));
+        Debug.LogWarning("\n==========\n" + content + "\n==========\n");
+        buffer = Encoding.UTF8.GetBytes(content);
         return buffer;
     }
 

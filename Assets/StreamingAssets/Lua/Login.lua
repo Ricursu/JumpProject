@@ -4,9 +4,7 @@ require('Music')
 local ui
 local manager
 function this.Awake(object)
-    Debugger.Log("\nLogin: \n=================\n 旧的Awake \n===================")
-    Debugger.Log("\nLogin: \n=================\n 旧的Awake \n===================")
-    Debugger.Log("\nLogin: \n=================\n 旧的Awake \n===================")
+    Debugger.Log("\nLogin: \n=================\n 新的Awake \n===================")
     manager = GameObject.Find('Manager')
     manager : AddComponent(typeof(AudioSource))
     coroutine.start(Music.PlaySound)--协程开始
