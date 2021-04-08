@@ -1,0 +1,23 @@
+ManifestFileVersion: 0
+CRC: 1313195114
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: bd7c417a5626f240bd912a3808cca279
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5678241641794813c2c5abc1654e95b9
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/Texture/Materials/testTex.mat
+- Assets/Texture/testTex.jpg
+Dependencies: []
