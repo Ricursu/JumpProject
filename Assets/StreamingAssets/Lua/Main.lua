@@ -2,6 +2,8 @@
 --全局变量
 function Main()
 	Debugger.Log("\nMain: \n=================\n 新的Main.lua \n===================")
+	Debugger.Log("\nMain: \n=================\n 新的Main.lua \n===================")
+	Debugger.Log("\nMain: \n=================\n 新的Main.lua \n===================")
 	GameObject = UnityEngine.GameObject
 	Transform = UnityEngine.Transform
 	ParticleSystem = UnityEngine.ParticleSystem
@@ -26,5 +28,4 @@ function OnLevelWasLoaded(level)
 end
 
 function OnApplicationQuit()
-
 end

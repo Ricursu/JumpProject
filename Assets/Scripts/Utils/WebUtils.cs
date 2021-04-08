@@ -7,6 +7,8 @@ using UnityEngine.Networking;
 
 public class WebUtils
 {
+    public static string IP = "http://10.13.9.210/";
+
     public static string GetIPAddress()
     {
         string ipaddr = null;
@@ -24,7 +26,7 @@ public class WebUtils
     public static void GetFileFromServer(string filename)
     {
         //Debug.Log(WebUtils.GetIPAddress());
-        string path = "http://192.168.3.30/" + filename;    // "http://" + WebUtils.GetIPAddress() + "/" +
+        string path = WebUtils.IP + filename;    // "http://" + WebUtils.GetIPAddress() + "/" +
         Debug.Log(path);
         UnityWebRequest request = UnityWebRequest.Get(path);
         request.SendWebRequest();
@@ -86,7 +88,7 @@ public class WebUtils
     public static byte[] GetByteFromServer(string filename)
     {
         //Debug.Log(WebUtils.GetIPAddress());
-        string path = "http://192.168.3.30/" + filename;    // "http://" + WebUtils.GetIPAddress() + "/" +
+        string path = WebUtils.IP + filename;    // "http://" + WebUtils.GetIPAddress() + "/" +
         Debug.Log(path);
         UnityWebRequest request = UnityWebRequest.Get(path);
         request.SendWebRequest();

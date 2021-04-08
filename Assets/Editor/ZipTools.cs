@@ -123,35 +123,65 @@ public class ZipTools
 
     [Obsolete]
     [MenuItem("Zip/UnZip")]
-    static void UnZip()
+    public static void UnZip()
     {
         Debug.Log("UnZip");
-        string path = "D://Apk/old.apk";
+        string version = HotUpdate.mReleaseVersion + "." + HotUpdate.mMajorVersion;
+        UnZipApk("D://Apk/" + version + ".apk", "v" + version);
+        string newPath = "D://Apk/version/v" + version + "/Source";
+        for (int i = HotUpdate.mMajorVersion - 1; i >=0; i--)
+        {
+            string tempVers = HotUpdate.mReleaseVersion + "." + i;
+            string oldPath = "D://Apk/version/v" + tempVers + "/Source";
+            string diffPath = "D://Apk/version/v" + version + "/Different/v" + tempVers + "-v" + version;
+            DiffUtils.buildFileDiff(oldPath, newPath, diffPath);
+        }
+    }
+
+    static void UnZipApk(string path, string version)
+    {
         ZipInputStream zipInput = new ZipInputStream(File.OpenRead(path));
         ZipEntry entry;
-        while((entry = zipInput.GetNextEntry()) != null)
+        try
         {
-            byte[] buffer = new byte[entry.Size + 1];
-            string directoryName = Path.GetDirectoryName(entry.Name);
-            string fileName = Path.GetFileName(entry.Name);
+            string unzipPath = "D://Apk/version/";
+            while ((entry = zipInput.GetNextEntry()) != null)
+            {
+                byte[] buffer = new byte[entry.Size + 1];
+                string directoryName = Path.GetDirectoryName(entry.Name);
+                string fileName = Path.GetFileName(entry.Name);
 
-            zipInput.Read(buffer, (int)entry.Offset, (int)entry.Size);
+                zipInput.Read(buffer, (int)entry.Offset, (int)entry.Size);
 
-            path = "D://Apk/old/";
-            path = Path.Combine(path, directoryName);
-            if (!path.Contains("Lua"))
-                continue;
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
+                path = unzipPath;
+                path = Path.Combine(path, version + "/Source");
+                if (!directoryName.Contains("Lua"))
+                    continue;
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
 
-            path = Path.Combine(path, fileName);
-            Debug.Log(Encoding.UTF8.GetString(buffer));
-            buffer = Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(buffer));
-            FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
-            fs.Write(buffer, 0, buffer.Length - 1);
-            fs.Flush();
-            fs.Dispose();
-            fs.Close();
+                path = Path.Combine(path, fileName);
+
+                buffer = Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(buffer));
+                FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+                fs.Write(buffer, 0, buffer.Length - 1);
+                fs.Flush();
+                fs.Dispose();
+                fs.Close();
+                path = unzipPath;
+                path = Path.Combine(path, version + "/Different");
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+                if (HotUpdate.mMajorVersion == 0)
+                    continue;
+            }
+        }catch(Exception e)
+        {
+            Debug.Log(e.GetType() + " " + e.GetBaseException());
+        }
+        finally
+        {
+            zipInput.Close();
         }
     }
 

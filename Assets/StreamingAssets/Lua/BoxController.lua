@@ -28,7 +28,7 @@ function this.Update(obj)
 	if Input.GetKey(KeyCode.Space) or Input.GetTouch(0).phase == TouchPhase.Stationary then
 		if currentBox.transform.localScale.y < 0.6 and currentBox.transform.localScale.y>0.39 then
 			currentBox.transform.localScale = currentBox.transform.localScale + Vector3(0, -1, 0) * 0.15 * Time.deltaTime
-			--currentBox.transform.localPosition = currentBox.transform.localPosition + Vector3(0, -1, 0) * 0.15 * Time.deltaTime
+			-- currentBox.transform.localPosition = currentBox.transform.localPosition + Vector3(0, -1, 0) * 0.15 * Time.deltaTime
 		end
 	end
 
@@ -55,8 +55,10 @@ function this.GenerateBox()
 	local newBox = GameObject.Instantiate(boxPrefab)
 
 	randomScale = Util.Random(0.5,1)
-	newBox.transform.position = currentBox.transform.position + Vector3(Util.Random(1.5, maxDistance), 0, 0)
-	plane.transform.localPosition = plane.transform.localPosition + Vector3(Util.Random(1.5, maxDistance), 0, 0)
+	newBox.transform.position = currentBox.transform.position + Vector3(-Util.Random(1.5, maxDistance), 0, 0)
+	plane.transform.localPosition = plane.transform.localPosition + Vector3(-Util.Random(1.5, maxDistance), 0, 0)
+	-- newBox.transform.position = currentBox.transform.position + Vector3(Util.Random(1.5, maxDistance), 0, 0)
+	-- plane.transform.localPosition = plane.transform.localPosition + Vector3(Util.Random(1.5, maxDistance), 0, 0)
 
 	newBox.transform.localScale = Vector3(randomScale, 0.5, randomScale)
     newBox : GetComponent('Renderer').material.color = Color(Util.Random(0.0, 1.0), Util.Random(0.0, 1.0), Util.Random(0.0, 1.0))

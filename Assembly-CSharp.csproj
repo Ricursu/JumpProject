@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\Util.cs" />
     <Compile Include="Assets\Scripts\Utils\Crc32.cs" />
     <Compile Include="Assets\Scripts\Utils\DiffUtils.cs" />
+    <Compile Include="Assets\Scripts\Utils\Downloader.cs" />
     <Compile Include="Assets\Scripts\Utils\FileUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\NETCore.Encrypt\EncryptProvider.cs" />
     <Compile Include="Assets\Scripts\Utils\NETCore.Encrypt\Exception\OutofMaxlengthException.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Assets\Scripts\Utils\NETCore.Encrypt\Extensions\Internal\StreamExtensions.cs" />
     <Compile Include="Assets\Scripts\Utils\NETCore.Encrypt\Internal\MD5Length.cs" />
     <Compile Include="Assets\Scripts\Utils\NETCore.Encrypt\Shared\Check.cs" />
+    <Compile Include="Assets\Scripts\Utils\TestHttpManager.cs" />
     <Compile Include="Assets\Scripts\Utils\VCDiff\Decoders\BodyDecoder.cs" />
     <Compile Include="Assets\Scripts\Utils\VCDiff\Decoders\CustomCodeTableDecoder.cs" />
     <Compile Include="Assets\Scripts\Utils\VCDiff\Decoders\InstructionDecoder.cs" />

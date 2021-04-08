@@ -146,4 +146,53 @@ public class DiffUtils
 
         }
     }
+
+    public static void buildFileDiff(string olePath, string newPath, string diffPath)
+    {
+        string[] newFile = Directory.GetFiles(newPath);
+        if (!Directory.Exists(diffPath))
+            Directory.CreateDirectory(diffPath);
+        FileStream fileList = new FileStream(Path.Combine(diffPath, "filelist.txt"), FileMode.Append, FileAccess.Write);
+        foreach (string name in newFile)
+        {
+            string filename = Path.GetFileName(name);
+            using (FileStream dict = new FileStream(Path.Combine(olePath, filename), FileMode.Open, FileAccess.Read))
+            using (FileStream target = new FileStream(name, FileMode.Open, FileAccess.Read))
+            {
+                byte[] buffer1 = new byte[dict.Length];
+                byte[] buffer2 = new byte[target.Length];
+
+                dict.Read(buffer1, 0, buffer1.Length);
+                target.Read(buffer2, 0, buffer2.Length);
+
+                string md5B1 = EncryptProvider.Md5(Encoding.UTF8.GetString(buffer1));
+                string md5B2 = EncryptProvider.Md5(Encoding.UTF8.GetString(buffer2));
+
+                if (md5B1 == md5B2)
+                    continue;
+
+
+                filename = Path.GetFileNameWithoutExtension(filename);
+                byte[] buffer = Encoding.UTF8.GetBytes(filename + "," + md5B1 + "\n");
+                fileList.Write(buffer, 0, buffer.Length);
+
+
+                FileStream output = new FileStream(Path.Combine(diffPath, md5B1), FileMode.Create, FileAccess.Write);
+
+                VCCoder coder = new VCCoder(dict, target, output);
+                VCDiffResult result = coder.Encode(false, true);
+
+                if (result != VCDiffResult.SUCCESS)
+                {
+                    Debug.Log("差分失败");
+                }
+                output.Dispose();
+                output.Close();
+            }
+        }
+        fileList.Dispose();
+        fileList.Close();
+
+    }
+
 }
