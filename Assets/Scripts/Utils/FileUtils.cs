@@ -52,6 +52,8 @@ public class FileUtils
         FileStream fs = null;
         try
         {
+            if (File.Exists(filename))
+                File.Delete(filename);
             fs = new FileStream(filename, FileMode.CreateNew, FileAccess.Write);
             fs.Write(buffer, 0, buffer.Length);
         }catch(Exception e)
@@ -115,6 +117,13 @@ public class FileUtils
         }
 
         return buffer;
+    }
+
+
+    public static void CopyFileToPath(string oldFilePath, string newFilePath)
+    {
+        byte[] buffer = ReadFileBytes(oldFilePath);
+        CreateFile(newFilePath, buffer);
     }
 
 }

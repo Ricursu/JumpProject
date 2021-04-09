@@ -887,4 +887,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/Jump.unity
-  playerPath: D:/Apk/1.2.apk
+  playerPath: D:/Apk/1.0.apk

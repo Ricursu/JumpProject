@@ -17,7 +17,7 @@ public class UnZipTool : MonoBehaviour
     {
         try
         {
-            UnZip(zipname);
+            //UnZip(zipname);
         }catch(Exception e)
         {
             Debug.Log("========================== \n  UNZIP ERROR  \n==========================");
@@ -32,7 +32,7 @@ public class UnZipTool : MonoBehaviour
     /// </summary>
     /// <param name="zipname">需要解压的压缩文件</param>
     /// <returns></returns>
-    public static void UnZip(string zipname)
+    public static void UnZip(string zipname, string unzipPath)
     {
         Debug.Log("========================== \n  UNZIP UNZIP UNZIP UNZIP  \n==========================");
 
@@ -41,26 +41,24 @@ public class UnZipTool : MonoBehaviour
         ZipInputStream zipInput = new ZipInputStream(File.OpenRead(path));
         ZipEntry entry;
 
-        Debug.Log(zipname.Substring(0, zipname.LastIndexOf('.')));
-        path = path.Replace(".zip", ""); // "D://Zip/version/";
-        if (Directory.Exists(path))
-            Directory.Delete(path, true);
-        Directory.CreateDirectory(path);
+        if (Directory.Exists(unzipPath))
+            Directory.Delete(unzipPath, true);
+        Directory.CreateDirectory(unzipPath);
 
         while ((entry = zipInput.GetNextEntry()) != null)
         {
             byte[] buffer = new byte[entry.Size + 1];
-            Debug.Log(entry.Name);
+            Debug.Log(entry.Name + "\n" + Path.Combine(unzipPath, entry.Name));
             zipInput.Read(buffer, (int)entry.Offset, (int)entry.Size);
 
             //将解压的文件写到磁盘中
-            FileUtils.CreateFile(Path.Combine(path, entry.Name), buffer);
+            FileUtils.CreateFile(Path.Combine(unzipPath, entry.Name), buffer);
         }
         Debug.Log("========================== \n  DELETEFILE DELETEFILE DELETEFILE DELETEFILE \n==========================\n" + deletefile);
         File.Delete(deletefile);
     }
 
-    public static void UnZipApk(string path)
+    public static void UnZipApk(string path, string unzipPath)
     {
         ZipInputStream zipInput = null;
         ZipEntry entry = null;
@@ -82,12 +80,11 @@ public class UnZipTool : MonoBehaviour
                 path = Path.Combine(path, directoryName);
                 if (!path.Contains("Lua"))
                     continue;
-                if (!Directory.Exists(path))
-                    Directory.CreateDirectory(path);
+                if (!Directory.Exists(unzipPath))
+                    Directory.CreateDirectory(unzipPath);
 
-                path = Path.Combine(path, fileName);
+                path = Path.Combine(unzipPath, fileName);
                 FileInfo fileInfo = new FileInfo(path);
-                Debug.Log(path);
                 FileStream fs = fileInfo.Create();
                 fs.Write(buffer, 0, buffer.Length - 1);
                 fs.Flush();

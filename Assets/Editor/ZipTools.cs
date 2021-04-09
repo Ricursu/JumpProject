@@ -19,40 +19,40 @@ public class ZipTools
     {
         string zipname = HotUpdate.mReleaseVersion + "." + HotUpdate.mMajorVersion;
         //获取path下的所有文件
-        string path = "D://Apk/Diff";
-        string[] files = Directory.GetFiles(path);
-        List<string> fileList = new List<string>();
-        //筛选需要压缩的文件
-        //foreach (string name in files)
-        //{
-        //    if (!name.EndsWith(".meta") && Path.GetFileName(name).Contains("unity3d"))
-        //        fileList.Add(name);
-        //}
-        //创建压缩文件输出流
+        string path = "D://Apk/version/v"+zipname+"/Different";
+        string[] files = Directory.GetDirectories(path);
+        Debug.LogError(path);
+        foreach (string file in files)
+        {
+            string tempName = file.Replace(path + "\\", "");
+            CreateZipStream(path, tempName, file);
+        }
+        
+    }
+
+    /// <summary>
+    /// 创建压缩文件输出流
+    /// </summary>
+    public static void CreateZipStream(string path, string zipname, string filePath)
+    {
         if (File.Exists(path + "/" + zipname + ".zip"))
             File.Delete(path + "/" + zipname + ".zip");
-        ZipOutputStream zipOutputStream = new ZipOutputStream(File.Create(path + "/version.zip"));   //" + zipname + "
+        ZipOutputStream zipOutputStream = new ZipOutputStream(File.Create(path + "/" + zipname + ".zip"));   //" + zipname + "
         zipOutputStream.SetLevel(6);
 
-        //创建压缩文件版本文件
-        string versionFileName = "version.txt";
-        versionFileName = path + "/" + versionFileName;
-        if (File.Exists(versionFileName))
-            File.Delete(versionFileName);
         //CreateVersionFile(versionFileName, "version:" + zipname);
 
         //将筛选后文件件写入压缩的输出流中
+        string[] files = Directory.GetFiles(filePath);
         foreach (string name in files)
         {
-            bool result = CreateZipFile(versionFileName, name, zipOutputStream);
+            bool result = CreateZipFile(name, zipOutputStream);
             if (result == false)
                 return;
         }
         //完成压缩
         zipOutputStream.Finish();
         zipOutputStream.Close();
-
-        FileUtils.WriteFileAppend(Path.Combine(path, "version.txt"), "version = " + zipname);
     }
 
     /// <summary>
@@ -62,7 +62,7 @@ public class ZipTools
     /// <param name="filename">需要压缩的带有绝对路径的文件名</param>
     /// <param name="zipOutputStream">写入压缩文件的输出流</param>
     /// <returns></returns>
-    static bool CreateZipFile(string versionFileName, string filename, ZipOutputStream zipOutputStream)
+    static bool CreateZipFile(string filename, ZipOutputStream zipOutputStream)
     {
         ZipEntry zipEntry = new ZipEntry(Path.GetFileName(filename));
         FileStream fs = null;
@@ -202,4 +202,14 @@ public class ZipTools
         //    Debug.Log(s.Trim());
     }
 
+    [MenuItem("Zip/Build Version File")]
+    public  static void BuildVersionFile()
+    {
+        string version = HotUpdate.mReleaseVersion + "." + HotUpdate.mMajorVersion;
+        string path = "D://Apk/version";
+        path = Path.Combine(path, "v" + version, "Different");
+        if (!Directory.Exists(path))
+            Directory.CreateDirectory(path);
+        FileUtils.CreateFile(path + "/version.txt", Encoding.UTF8.GetBytes("version = " + version));
+    }
 }

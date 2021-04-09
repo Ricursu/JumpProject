@@ -19,10 +19,12 @@ public class DiffUtils
             string luaFile = fileInfo[0] + ".lua";
             //Debug.Log("\n===========================\n" + listFilePath + luaFile + "\n" + luaPath + luaFile + "\n" + fileName + "\n===========================\n");
             Debug.LogError("\n==============\n" + fileInfo[0] + fileInfo[1] + "\n==============\n");
-            string reductionPath = Path.Combine(Path.GetDirectoryName(listFilePath), luaFile);
+            string reductionPath = Path.Combine(Application.persistentDataPath, luaFile);
             string oldFilePath = Path.Combine(luaPath, luaFile);
             string diffFilePath = Path.Combine(Path.GetDirectoryName(listFilePath), fileInfo[1]);
             Reduction(reductionPath, oldFilePath, diffFilePath);
+            FileUtils.CopyFileToPath(reductionPath, oldFilePath);
+            File.Delete(reductionPath);
         }
     }
 
@@ -30,7 +32,7 @@ public class DiffUtils
     {
         try
         {
-            using (FileStream output = new FileStream(reductionPath, FileMode.Create, FileAccess.Write))             //旧apk包打入差分文件后的新apk包
+            using (FileStream output = new FileStream(reductionPath, FileMode.CreateNew, FileAccess.Write))             //旧apk包打入差分文件后的新apk包
             using (FileStream dict = new FileStream(oldFilePath, FileMode.Open, FileAccess.Read))                     //旧版apk包
             using (FileStream target = new FileStream(diffFilePath, FileMode.Open, FileAccess.Read))                //差分包
             {

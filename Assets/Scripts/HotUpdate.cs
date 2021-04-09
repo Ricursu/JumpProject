@@ -11,7 +11,7 @@ public class HotUpdate : MonoBehaviour
 {
     // Start is called before the first frame update
     public static int mReleaseVersion = 1;
-    public static int mMajorVersion = 2;
+    public static int mMajorVersion = 0;
 
     public static string APKMD5 = "";
 
@@ -21,22 +21,70 @@ public class HotUpdate : MonoBehaviour
     void Awake()
     {
         //string packageName = "com." + Application.companyName + "." + Application.productName;
+        //1、创建版本文件config.ini
         CreateVersionFile();
+        //2、判断是否需要更新
         if (!IsUpdate())
             return;
 
-        if(!Directory.Exists(Path.Combine(Application.persistentDataPath,"assets")))
+        //3、判断是否需要释放APK
+        if(!Directory.Exists(Path.Combine(Application.persistentDataPath,"Lua")))
         {
+            //3.1、从文件管理器中获取APK
             GetApkFromFileManager();
-            UnZipTool.UnZipApk(Application.persistentDataPath + "/base.apk");
+            //3.2、 解压APK
+            UnZipTool.UnZipApk(Application.persistentDataPath + "/base.apk", Path.Combine(Application.persistentDataPath, "Lua"));
         }
 
-        WebUtils.GetFileFromServer("version.zip");
-        UnZipTool.UnZip("version.zip");
-        DiffUtils.ReductionFile(Path.Combine(Application.persistentDataPath, "assets/Lua"), Path.Combine(Application.persistentDataPath, "version/filelist.txt"));
+        //4、获取服务器压缩文件
+        GetZipFromServer();
+        //5、解压第4步中获取的压缩文件
+        UnZipFile();
+        //6、还原压缩文件中的差分包或将压缩文件中的Lua文件复制到本地文件
+        RedutionFile();
 
-        //todo 更新本地版本文件version.ini的内容
+        //7、 更新本地版本文件version.ini的内容
         FileUtils.CreateFile(Path.Combine(Application.persistentDataPath, "config.ini"), WebUtils.GetByteFromServer("version.txt"));
+    }
+
+    private void RedutionFile()
+    {
+        string[] files = Directory.GetFiles(Path.Combine(Application.persistentDataPath, "Temp"));
+        foreach(string file in files)
+        {
+            if (file.EndsWith(".lua"))
+            {
+                FileUtils.CopyFileToPath(file, file.Replace("Temp", "Lua"));
+            }
+        }
+        DiffUtils.ReductionFile(Path.Combine(Application.persistentDataPath, "Lua"), Path.Combine(Application.persistentDataPath, "Temp/filelist.txt"));
+    }
+
+    private void UnZipFile()
+    {
+        string version = Encoding.UTF8.GetString(FileUtils.ReadFileBytes(Path.Combine(Application.persistentDataPath, "config.ini")));
+        string[] value = version.Split('=');
+        value[1] = value[1].Trim();
+        string serverVersion = Encoding.UTF8.GetString(WebUtils.GetByteFromServer("version.txt"));
+        string[] serverValue = serverVersion.Split('=');
+        serverValue[1] = serverValue[1].Trim();
+
+        string filename = "v" + value[1] + "-v" + serverValue[1] + ".zip";
+        Debug.LogError("\n=========\n" + filename + "\n=========\n");
+        UnZipTool.UnZip(filename, Path.Combine(Application.persistentDataPath, "Temp"));
+    }
+
+    private void GetZipFromServer()
+    {
+        string version = Encoding.UTF8.GetString(FileUtils.ReadFileBytes(Path.Combine(Application.persistentDataPath, "config.ini")));
+        string[] value = version.Split('=');
+        value[1] = value[1].Trim();
+        string serverVersion = Encoding.UTF8.GetString(WebUtils.GetByteFromServer("version.txt"));
+        string[] serverValue = serverVersion.Split('=');
+        serverValue[1] = serverValue[1].Trim();
+
+        string filename = "v" + value[1] + "-v" + serverValue[1] + ".zip";
+        WebUtils.GetFileFromServer(filename);
     }
 
     /// <summary>
@@ -46,6 +94,8 @@ public class HotUpdate : MonoBehaviour
     /// <returns></returns>
     private bool IsUpdate()
     {
+        if (Directory.Exists(Application.persistentDataPath + "/Temp"))
+            Directory.Delete(Application.persistentDataPath + "/Temp", true);
         string serverVersion = Encoding.UTF8.GetString(WebUtils.GetByteFromServer("version.txt"));
         string localVersion = Encoding.UTF8.GetString(FileUtils.ReadFileBytes(Path.Combine(Application.persistentDataPath, "config.ini")));
         string[] serverInfo = serverVersion.Split('=');
@@ -88,7 +138,7 @@ public class HotUpdate : MonoBehaviour
             UnityEditor.AssetDatabase.Refresh();
 #endif
             Debug.Log(" 下载完成");
-            UnZipTool.UnZipPackage(fileName);
+            //UnZipTool.UnZipPackage(fileName);
         }
     }
 

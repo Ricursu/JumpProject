@@ -146,7 +146,7 @@ public class LuaResLoader : LuaFileUtils
         }
 
         byte[] buffer = null;
-        string path = Path.Combine(Application.persistentDataPath, "version", fileName);
+        string path = Path.Combine(Application.persistentDataPath, "Lua", fileName);
         if (!File.Exists(path))
             return buffer;
         string content = Encoding.UTF8.GetString(FileUtils.ReadFileBytes(path));
