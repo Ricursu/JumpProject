@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public class WebUtils
 {
-    public static string IP = "http://192.168.137.1/";
+    public static string IP = "http://192.168.191.1/";
 
     public static string GetIPAddress()
     {
@@ -111,5 +111,27 @@ public class WebUtils
             //UnZipTool.UnZipPackage(fileName);
         }
         return null;
+    }
+
+    public static void GetApkFromFile()
+    {
+        string files = Application.streamingAssetsPath.Replace("jar:", "");
+        files = files.Replace("!/assets", "");
+        using (WWW www = new WWW(files))
+        {
+            while (!www.isDone)
+            {
+                Debug.Log("GetApkFromFileManager:\n=================\n" + www.progress + "\n=================\n");
+            }
+
+            if (www.isDone)
+            {
+                FileStream output = new FileStream(Application.persistentDataPath + "/base.apk", FileMode.Create, FileAccess.Write);
+                byte[] buffer = www.bytes;
+                output.Write(buffer, 0, buffer.Length);
+                output.Close();
+                output.Dispose();
+            }
+        }
     }
 }

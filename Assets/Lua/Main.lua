@@ -1,7 +1,7 @@
 --主入口函数。从这里开始lua逻辑
 --全局变量
 function Main()
-	Debugger.Log("\nMain: \n=================\n 旧的Main.lua \n===================")
+	Debugger.Log("\nMain: \n=================\n 新的Main.lua \n===================")
 	GameObject = UnityEngine.GameObject
 	Transform = UnityEngine.Transform
 	ParticleSystem = UnityEngine.ParticleSystem
@@ -17,6 +17,18 @@ function Main()
 	Rigidbody = UnityEngine.Rigidbody
 	www = UnityEngine.WWW		
 	print("logic start")	 		
+
+	-- Directory = System.IO.Directory
+	-- Path = System.IO.Path
+	-- File = System.IO.File
+	-- Encoding = System.Text.Encoding
+
+	HotUpdate = HotUpdate.New()
+	UnZipTool = UnZipTool.New()
+	FileUtils = FileUtils.New()
+	WebUtils = WebUtils.New()
+	DiffUtils = DiffUtils.New()
+
 end
 
 --场景切换通知

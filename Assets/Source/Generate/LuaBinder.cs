@@ -14,6 +14,11 @@ public static class LuaBinder
 		UtilWrap.Register(L);
 		UIEventWrap.Register(L);
 		BoxControlWrap.Register(L);
+		HotUpdateWrap.Register(L);
+		UnZipToolWrap.Register(L);
+		FileUtilsWrap.Register(L);
+		WebUtilsWrap.Register(L);
+		DiffUtilsWrap.Register(L);
 		L.BeginModule("LuaInterface");
 		LuaInterface_LuaInjectionStationWrap.Register(L);
 		LuaInterface_InjectTypeWrap.Register(L);
@@ -109,6 +114,9 @@ public static class LuaBinder
 		L.RegFunction("Action_string", System_Action_string);
 		L.RegFunction("Func_bool", System_Func_bool);
 		L.RegFunction("Action_UnityEngine_AsyncOperation", System_Action_UnityEngine_AsyncOperation);
+		L.BeginModule("IO");
+		System_IO_PathWrap.Register(L);
+		L.EndModule();
 		L.EndModule();
 		L.EndModule();
 		L.BeginPreLoad();

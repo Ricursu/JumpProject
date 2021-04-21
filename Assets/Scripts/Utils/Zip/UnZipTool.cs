@@ -6,7 +6,7 @@ using System.IO;
 using System;
 using System.Text;
 
-public class UnZipTool : MonoBehaviour
+public class UnZipTool
 {
     /// <summary>
     /// 解压文件名为zipname的压缩文件
@@ -107,4 +107,5 @@ public class UnZipTool : MonoBehaviour
                 File.Delete(apkPath);
         }
     }
+
 }

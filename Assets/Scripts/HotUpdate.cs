@@ -28,7 +28,7 @@ public class HotUpdate : MonoBehaviour
             return;
 
         //3、判断是否需要释放APK
-        if(!Directory.Exists(Path.Combine(Application.persistentDataPath,"Lua")))
+        if (!Directory.Exists(Path.Combine(Application.persistentDataPath, "Lua")))
         {
             //3.1、从文件管理器中获取APK
             GetApkFromFileManager();
@@ -147,28 +147,30 @@ public class HotUpdate : MonoBehaviour
     /// </summary>
     void GetApkFromFileManager()
     {
-        string files = Application.streamingAssetsPath.Replace("jar:", "");
-        files = files.Replace("!/assets", "");
-        using (WWW www = new WWW(files))
-        {
-            while (!www.isDone)
-            {
-                Debug.Log("GetApkFromFileManager:\n=================\n" + www.progress + "\n=================\n");
-            }
+        WebUtils.GetApkFromFile();
 
-            Debug.Log("\n==================\n==================\n" + Application.streamingAssetsPath + "\n/data/app/" + "\n==================\n==================\n");
-            if (www.isDone)
-            {
-                Debug.Log("\n==================\n==================\n" + Application.streamingAssetsPath + "\n" + files + "\n==================\n==================\n");
-                FileStream output = new FileStream(Application.persistentDataPath + "/base.apk", FileMode.Create, FileAccess.Write);
-                byte[] buffer = www.bytes;
-                //APKMD5 = EncryptProvider.Md5(Encoding.UTF8.GetString(buffer));
-                Debug.Log("\n=======================\n" + APKMD5 + "\n=======================\n");
-                output.Write(buffer, 0, buffer.Length);
-                output.Close();
-                output.Dispose();
-            }
-        }
+        //string files = Application.streamingAssetsPath.Replace("jar:", "");
+        //files = files.Replace("!/assets", "");
+        //using (WWW www = new WWW(files))
+        //{
+        //    while (!www.isDone)
+        //    {
+        //        Debug.Log("GetApkFromFileManager:\n=================\n" + www.progress + "\n=================\n");
+        //    }
+
+        //    Debug.Log("\n==================\n==================\n" + Application.streamingAssetsPath + "\n/data/app/" + "\n==================\n==================\n");
+        //    if (www.isDone)
+        //    {
+        //        Debug.Log("\n==================\n==================\n" + Application.streamingAssetsPath + "\n" + files + "\n==================\n==================\n");
+        //        FileStream output = new FileStream(Application.persistentDataPath + "/base.apk", FileMode.Create, FileAccess.Write);
+        //        byte[] buffer = www.bytes;
+        //        //APKMD5 = EncryptProvider.Md5(Encoding.UTF8.GetString(buffer));
+        //        Debug.Log("\n=======================\n" + APKMD5 + "\n=======================\n");
+        //        output.Write(buffer, 0, buffer.Length);
+        //        output.Close();
+        //        output.Dispose();
+        //    }
+        //}
     }
 
     void CreateVersionFile()
@@ -177,11 +179,8 @@ public class HotUpdate : MonoBehaviour
         if (File.Exists(filename))
             return;
         string content = "version = " + mReleaseVersion + "." + mMajorVersion;
-        FileStream output = new FileStream(filename, FileMode.Create, FileAccess.Write);
         byte[] buffer = Encoding.UTF8.GetBytes(content);
-        output.Write(buffer, 0, buffer.Length);
-        output.Dispose();
-        output.Close();
+        FileUtils.CreateFile(filename, buffer);
     }
 
 }

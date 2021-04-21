@@ -28,7 +28,7 @@ function this.Update(obj)
 	if Input.GetKey(KeyCode.Space) or Input.GetTouch(0).phase == TouchPhase.Stationary then
 		if currentBox.transform.localScale.y < 0.6 and currentBox.transform.localScale.y>0.39 then
 			currentBox.transform.localScale = currentBox.transform.localScale + Vector3(0, -1, 0) * 0.15 * Time.deltaTime
-			--currentBox.transform.localPosition = currentBox.transform.localPosition + Vector3(0, -1, 0) * 0.15 * Time.deltaTime
+			-- currentBox.transform.localPosition = currentBox.transform.localPosition + Vector3(0, -1, 0) * 0.15 * Time.deltaTime
 		end
 	end
 

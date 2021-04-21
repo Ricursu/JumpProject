@@ -11,8 +11,8 @@ local cameraRelativePosition
 
 function this.Awake(object)
     print("Player")
-    Camera.main.transform.position = Vector3.New(2, 2, -4); --(-4, 2, -4),(2,2,-4)
-    Camera.main.transform:Rotate(Vector3.New(12, 260, 0));  --(12, 100, 0),(12,260,0)
+    Camera.main.transform.position = Vector3.New(-4, 2, -4); --(-4, 2, -4),(2,2,-4)
+    Camera.main.transform:Rotate(Vector3.New(12, 100, 0));  --(12, 100, 0),(12,260,0)
     player = object
     rigidbody = player:GetComponent("Rigidbody")
     head = player.transform:Find("Head").gameObject
@@ -25,8 +25,8 @@ function this.Awake(object)
 end
 
 function this.StartJump(time)
-    -- rigidbody:AddForce(Vector3(1, 1, 0) * time * 7, UnityEngine.ForceMode.Impulse)
-    rigidbody:AddForce(Vector3(-1, 1, 0) * time * 7, UnityEngine.ForceMode.Impulse)
+    rigidbody:AddForce(Vector3(1, 1, 0) * time * 7, UnityEngine.ForceMode.Impulse)
+    -- rigidbody:AddForce(Vector3(-1, 1, 0) * time * 7, UnityEngine.ForceMode.Impulse)
 end
 
 function this.Update()

@@ -7,6 +7,8 @@ using UnityEditor;
 using BindType = ToLuaMenu.BindType;
 using System.Reflection;
 using UnityEngine.SceneManagement;
+using System.IO;
+using System.Text;
 
 public static class CustomSettings
 {
@@ -162,10 +164,28 @@ public static class CustomSettings
 
         //myType
         _GT(typeof(Util)),
+        _GT(typeof(Path)),
+        //_GT(typeof(Directory)),
+        //_GT(typeof(DiffUtils)),
+        //_GT(typeof(FileUtils)),
+        //_GT(typeof(WebUtils)),
+        //_GT(typeof(UnZipTool)),
+        //_GT(typeof(HotUpdate)),
         _GT(typeof(ForceMode)),
         _GT(typeof(UIEvent)),
         _GT(typeof(BoxControl)),
         _GT(typeof(SceneManager)),
+
+        //HotUpdate Type
+        //_GT(typeof(Directory)),
+        //_GT(typeof(File)),
+
+        _GT(typeof(HotUpdate)),
+        _GT(typeof(UnZipTool)),
+        _GT(typeof(FileUtils)),
+        _GT(typeof(WebUtils)),
+        _GT(typeof(DiffUtils))
+
     };
 
     public static List<Type> dynamicList = new List<Type>()

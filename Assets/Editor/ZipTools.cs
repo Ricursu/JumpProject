@@ -134,7 +134,7 @@ public class ZipTools
             string tempVers = HotUpdate.mReleaseVersion + "." + i;
             string oldPath = "D://Apk/version/v" + tempVers + "/Source";
             string diffPath = "D://Apk/version/v" + version + "/Different/v" + tempVers + "-v" + version;
-            DiffUtils.buildFileDiff(oldPath, newPath, diffPath);
+            DiffTools.buildFileDiff(oldPath, newPath, diffPath);
         }
     }
 
@@ -211,5 +211,11 @@ public class ZipTools
         if (!Directory.Exists(path))
             Directory.CreateDirectory(path);
         FileUtils.CreateFile(path + "/version.txt", Encoding.UTF8.GetBytes("version = " + version));
+    }
+
+    [MenuItem("Zip/Get IP Address")]
+    public static void GetIPAddress()
+    {
+        Debug.Log(WebUtils.GetIPAddress());
     }
 }

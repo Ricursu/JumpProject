@@ -10,7 +10,7 @@ using VCDiff.Decoders;
 using NETCore.Encrypt;
 using System.Text;
 
-public class DiffUtils
+public class DiffTools
 {
     [MenuItem("VCDiff/Build Diff")]
     public static void DoEncode()
