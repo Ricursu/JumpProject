@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public class WebUtils
 {
-    public static string IP = "http://192.168.191.1/";
+    public static string IP = "http://10.13.9.210/";
 
     public static string GetIPAddress()
     {
@@ -43,14 +43,14 @@ public class WebUtils
         {
             byte[] bytes = request.downloadHandler.data;
 
-            if (Application.platform == RuntimePlatform.Android)
-            {
+            //if (Application.platform == RuntimePlatform.Android)
+            //{
                 string savePath = Application.persistentDataPath;
                 if (!Directory.Exists(savePath))
                     Directory.CreateDirectory(savePath);
                 FileUtils.CreateFile(Path.Combine(savePath, filename), bytes);
 
-            }
+            //}
 #if UNITY_EDITOR
             UnityEditor.AssetDatabase.Refresh();
 #endif

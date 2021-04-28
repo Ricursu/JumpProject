@@ -6,26 +6,31 @@ public class HotUpdateWrap
 {
 	public static void Register(LuaState L)
 	{
-		L.BeginClass(typeof(HotUpdate), typeof(UnityEngine.MonoBehaviour));
-		L.RegFunction("__eq", op_Equality);
+		L.BeginClass(typeof(HotUpdate), typeof(System.Object));
+		L.RegFunction("New", _CreateHotUpdate);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("mReleaseVersion", get_mReleaseVersion, set_mReleaseVersion);
 		L.RegVar("mMajorVersion", get_mMajorVersion, set_mMajorVersion);
-		L.RegVar("APKMD5", get_APKMD5, set_APKMD5);
 		L.EndClass();
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int op_Equality(IntPtr L)
+	static int _CreateHotUpdate(IntPtr L)
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.Object arg0 = (UnityEngine.Object)ToLua.ToObject(L, 1);
-			UnityEngine.Object arg1 = (UnityEngine.Object)ToLua.ToObject(L, 2);
-			bool o = arg0 == arg1;
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
+			int count = LuaDLL.lua_gettop(L);
+
+			if (count == 0)
+			{
+				HotUpdate obj = new HotUpdate();
+				ToLua.PushObject(L, obj);
+				return 1;
+			}
+			else
+			{
+				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: HotUpdate.New");
+			}
 		}
 		catch (Exception e)
 		{
@@ -62,20 +67,6 @@ public class HotUpdateWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_APKMD5(IntPtr L)
-	{
-		try
-		{
-			LuaDLL.lua_pushstring(L, HotUpdate.APKMD5);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_mReleaseVersion(IntPtr L)
 	{
 		try
@@ -97,21 +88,6 @@ public class HotUpdateWrap
 		{
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			HotUpdate.mMajorVersion = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_APKMD5(IntPtr L)
-	{
-		try
-		{
-			string arg0 = ToLua.CheckString(L, 2);
-			HotUpdate.APKMD5 = arg0;
 			return 0;
 		}
 		catch (Exception e)

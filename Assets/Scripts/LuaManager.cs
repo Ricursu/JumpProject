@@ -27,6 +27,8 @@ public class LuaManager : MonoBehaviour
         //需要将LuaClient中的protected LuaState luaState = null;改为public，
         //同时可以在LuaClient中再封装一个调用Lua模块函数的方法。
         luaClient = this.gameObject.AddComponent<LuaClient>();
+        LuaManager.Instance.LuaClient.luaState.DoFile("HotUpdate.lua");
+        LuaManager.Instance.LuaClient.CallFunc("HotUpdate.Awake", this.gameObject);
 
         //重启Lua虚拟机
         //gameObject.GetComponent<LuaClient>().Destroy();

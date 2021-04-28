@@ -105,7 +105,6 @@ public static class CustomSettings
         _GT(typeof(MonoBehaviour)),        
         _GT(typeof(GameObject)),
         _GT(typeof(TrackedReference)),
-        _GT(typeof(Application)),
         _GT(typeof(Physics)),
         _GT(typeof(Collider)),
         _GT(typeof(Time)),        
@@ -165,7 +164,7 @@ public static class CustomSettings
         //myType
         _GT(typeof(Util)),
         _GT(typeof(Path)),
-        //_GT(typeof(Directory)),
+        _GT(typeof(Directory)),
         //_GT(typeof(DiffUtils)),
         //_GT(typeof(FileUtils)),
         //_GT(typeof(WebUtils)),
@@ -175,10 +174,12 @@ public static class CustomSettings
         _GT(typeof(UIEvent)),
         _GT(typeof(BoxControl)),
         _GT(typeof(SceneManager)),
+        _GT(typeof(Application)),
 
         //HotUpdate Type
         //_GT(typeof(Directory)),
-        //_GT(typeof(File)),
+        _GT(typeof(File)),
+        _GT(typeof(EncodingUtils)),
 
         _GT(typeof(HotUpdate)),
         _GT(typeof(UnZipTool)),

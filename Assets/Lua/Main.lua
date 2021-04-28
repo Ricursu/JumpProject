@@ -18,17 +18,18 @@ function Main()
 	www = UnityEngine.WWW		
 	print("logic start")	 		
 
-	-- Directory = System.IO.Directory
-	-- Path = System.IO.Path
-	-- File = System.IO.File
+	Directory = System.IO.Directory
+	Path = System.IO.Path
+	Application = UnityEngine.Application
+	File = System.IO.File
 	-- Encoding = System.Text.Encoding
 
-	HotUpdate = HotUpdate.New()
+	HotUpdateClass = HotUpdate.New()
+	Encoding = EncodingUtils.New()
 	UnZipTool = UnZipTool.New()
 	FileUtils = FileUtils.New()
 	WebUtils = WebUtils.New()
 	DiffUtils = DiffUtils.New()
-
 end
 
 --场景切换通知

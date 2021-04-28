@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\HotUpdate.cs" />
     <Compile Include="Assets\Scripts\HttpDownLoad.cs" />
     <Compile Include="Assets\Scripts\LoadFromFile.cs" />
+    <Compile Include="Assets\Scripts\Loading.cs" />
     <Compile Include="Assets\Scripts\Login.cs" />
     <Compile Include="Assets\Scripts\LuaManager.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets\Scripts\Utils\Crc32.cs" />
     <Compile Include="Assets\Scripts\Utils\DiffUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\Downloader.cs" />
+    <Compile Include="Assets\Scripts\Utils\EncodingUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\FileUtils.cs" />
     <Compile Include="Assets\Scripts\Utils\NETCore.Encrypt\EncryptProvider.cs" />
     <Compile Include="Assets\Scripts\Utils\NETCore.Encrypt\Exception\OutofMaxlengthException.cs" />
@@ -192,6 +194,7 @@
     <Compile Include="Assets\Source\Generate\BoxControlWrap.cs" />
     <Compile Include="Assets\Source\Generate\DelegateFactory.cs" />
     <Compile Include="Assets\Source\Generate\DiffUtilsWrap.cs" />
+    <Compile Include="Assets\Source\Generate\EncodingUtilsWrap.cs" />
     <Compile Include="Assets\Source\Generate\FileUtilsWrap.cs" />
     <Compile Include="Assets\Source\Generate\HotUpdateWrap.cs" />
     <Compile Include="Assets\Source\Generate\LuaBinder.cs" />
@@ -199,6 +202,8 @@
     <Compile Include="Assets\Source\Generate\LuaInterface_InjectTypeWrap.cs" />
     <Compile Include="Assets\Source\Generate\LuaInterface_LuaInjectionStationWrap.cs" />
     <Compile Include="Assets\Source\Generate\LuaProfilerWrap.cs" />
+    <Compile Include="Assets\Source\Generate\System_IO_DirectoryWrap.cs" />
+    <Compile Include="Assets\Source\Generate\System_IO_FileWrap.cs" />
     <Compile Include="Assets\Source\Generate\System_IO_PathWrap.cs" />
     <Compile Include="Assets\Source\Generate\UIEventWrap.cs" />
     <Compile Include="Assets\Source\Generate\UnZipToolWrap.cs" />

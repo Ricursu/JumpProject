@@ -12,6 +12,8 @@ public class Login : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //LuaManager.Instance.LuaClient.luaState.RegConstant("ReleaseVersion", (double)HotUpdate.mReleaseVersion);
+        //LuaManager.Instance.LuaClient.luaState.RegConstant("MajorVersion", (double)HotUpdate.mMajorVersion);
         LuaManager.Instance.LuaClient.luaState.DoFile("Login.lua");
         LuaManager.Instance.LuaClient.CallFunc("Login.Awake", this.gameObject);
     }
