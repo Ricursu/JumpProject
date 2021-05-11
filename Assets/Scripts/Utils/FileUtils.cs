@@ -119,6 +119,26 @@ public class FileUtils
         return buffer;
     }
 
+    public static bool FileExists(string filename)
+    {
+        return File.Exists(filename);
+    }
+
+    public static bool DirectoryExists(string filename)
+    {
+        return Directory.Exists(filename);
+    }
+
+    public static void DirectoryDelete(string filename, bool recursive)
+    {
+        Directory.Delete(filename, recursive);
+    }
+
+    public static string[] DirectoryGetFiles(string filename)
+    {
+        return Directory.GetFiles(filename);
+    }
+
 
     public static void CopyFileToPath(string oldFilePath, string newFilePath)
     {

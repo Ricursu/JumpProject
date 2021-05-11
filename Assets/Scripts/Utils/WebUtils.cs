@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public class WebUtils
 {
-    public static string IP = "http://10.13.9.210/";
+    public static string IP = "http://192.168.3.30/";
 
     public static string GetIPAddress()
     {

@@ -450,7 +450,7 @@ namespace Unity.Android.Logcat
             EditorGUILayout.BeginHorizontal(AndroidLogcatStyles.toolbar);
             if (GUILayout.Button("Reload Me", AndroidLogcatStyles.toolbarButton))
             {
-                UnityEditorInternal.InternalEditorUtility.RequestScriptReload();
+                EditorUtility.RequestScriptReload();
             }
 
             if (GUILayout.Button("AutoSelect " + AutoSelectPackage.ToString(), AndroidLogcatStyles.toolbarButton))

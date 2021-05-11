@@ -202,8 +202,6 @@
     <Compile Include="Assets\Source\Generate\LuaInterface_InjectTypeWrap.cs" />
     <Compile Include="Assets\Source\Generate\LuaInterface_LuaInjectionStationWrap.cs" />
     <Compile Include="Assets\Source\Generate\LuaProfilerWrap.cs" />
-    <Compile Include="Assets\Source\Generate\System_IO_DirectoryWrap.cs" />
-    <Compile Include="Assets\Source\Generate\System_IO_FileWrap.cs" />
     <Compile Include="Assets\Source\Generate\System_IO_PathWrap.cs" />
     <Compile Include="Assets\Source\Generate\UIEventWrap.cs" />
     <Compile Include="Assets\Source\Generate\UnZipToolWrap.cs" />
@@ -379,34 +377,34 @@
     <None Include="Assets\ToLua\Injection\LuaInjectionSkipPaths.txt" />
     <None Include="Assets\Demigiant\DOTween\readme.txt" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/GitClone/JumpProject/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>D:/GitClone/RollBack/JumpProject/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/GitClone/JumpProject/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>D:/GitClone/RollBack/JumpProject/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/GitClone/JumpProject/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/GitClone/RollBack/JumpProject/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/GitClone/JumpProject/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/GitClone/RollBack/JumpProject/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/GitClone/JumpProject/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>D:/GitClone/RollBack/JumpProject/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/GitClone/JumpProject/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/GitClone/RollBack/JumpProject/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/GitClone/JumpProject/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>D:/GitClone/RollBack/JumpProject/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mobile.AndroidLogcat.Editor">
-      <HintPath>D:/GitClone/JumpProject/Library/ScriptAssemblies/Unity.Mobile.AndroidLogcat.Editor.dll</HintPath>
+      <HintPath>D:/GitClone/RollBack/JumpProject/Library/ScriptAssemblies/Unity.Mobile.AndroidLogcat.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/GitClone/JumpProject/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/GitClone/RollBack/JumpProject/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/GitClone/JumpProject/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/GitClone/RollBack/JumpProject/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/UnityInstall/2019.3.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -580,13 +578,13 @@
       <HintPath>D:/UnityInstall/2019.3.3f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
-      <HintPath>D:/GitClone/JumpProject/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+      <HintPath>D:/GitClone/RollBack/JumpProject/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
     </Reference>
     <Reference Include="CString">
-      <HintPath>D:/GitClone/JumpProject/Assets/Plugins/CString.dll</HintPath>
+      <HintPath>D:/GitClone/RollBack/JumpProject/Assets/Plugins/CString.dll</HintPath>
     </Reference>
     <Reference Include="Debugger">
-      <HintPath>D:/GitClone/JumpProject/Assets/Plugins/Debugger.dll</HintPath>
+      <HintPath>D:/GitClone/RollBack/JumpProject/Assets/Plugins/Debugger.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:/UnityInstall/2019.3.3f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

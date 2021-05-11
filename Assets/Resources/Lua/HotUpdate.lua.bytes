@@ -5,15 +5,15 @@ function this.Awake(object)
     -- 1、创建版本文件config.ini
     this.CreateVersionFile();
     -- 2、判断是否需要更新
-    if ~IsUpdate() then
+    if not this.IsUpdate() then
         return;
     end
     -- 3、判断是否需要释放APK
-    if ~Directory.Exists(Path.Combine(Application.persistentDataPath, "Lua")) then
+    if not FileUtils.DirectoryExists(Path.Combine(Application.persistentDataPath, "Lua")) then
         -- 3.1、从文件管理器中获取APK
         this.GetApkFromFileManager();
         -- 3.2、 解压APK
-        UnZipTool.UnZipApk(Application.persistentDataPath + "/base.apk", Path.Combine(Application.persistentDataPath, "Lua"));
+        UnZipTool.UnZipApk(Application.persistentDataPath .. "/base.apk", Path.Combine(Application.persistentDataPath, "Lua"));
     end
 
     -- 4、获取服务器压缩文件
@@ -29,15 +29,15 @@ end
 
 function this.CreateVersionFile()
     local filename = Path.Combine(Application.persistentDataPath, "config.ini");
-    if File.Exists(filename) then
+    if FileUtils.FileExists(filename) then
         return;
     end
-    FileUtils.CreateFile(filename, Encoding.GetBytes("version = " + HotUpdate.mReleaseVersion + "." + HotUpdate.mMajorVersion));
+    FileUtils.CreateFile(filename, Encoding.GetBytes("version = " .. HotUpdateClass.mReleaseVersion .. "." .. HotUpdateClass.mMajorVersion));
 end
 
 function this.IsUpdate()
-    if Directory.Exists(Application.persistentDataPath + "/Temp") then
-        Directory.Delete(Application.persistentDataPath + "/Temp", true);
+    if FileUtils.DirectoryExists(Application.persistentDataPath .. "/Temp") then
+        FileUtils.DirectoryDelete(Application.persistentDataPath .. "/Temp", true);
     end
     local serverVersion = Encoding.GetString(WebUtils.GetByteFromServer("version.txt"));
     local localVersion = Encoding.GetString(FileUtils.ReadFileBytes(Path.Combine(Application.persistentDataPath, "config.ini")));
@@ -79,7 +79,7 @@ function this.UnZipFile()
 end
 
 function this.RedutionFile()
-    local files = Directory.GetFiles(Path.Combine(Application.persistentDataPath, "Temp"));
+    local files = FileUtils.DirectoryGetFiles(Path.Combine(Application.persistentDataPath, "Temp"));
     Debugger.Log(files.Length)
     local i = 0
     while i < files.Length do

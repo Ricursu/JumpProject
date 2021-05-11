@@ -14,8 +14,8 @@ public class Login : MonoBehaviour
     {
         //LuaManager.Instance.LuaClient.luaState.RegConstant("ReleaseVersion", (double)HotUpdate.mReleaseVersion);
         //LuaManager.Instance.LuaClient.luaState.RegConstant("MajorVersion", (double)HotUpdate.mMajorVersion);
-        LuaManager.Instance.LuaClient.luaState.DoFile("Login.lua");
-        LuaManager.Instance.LuaClient.CallFunc("Login.Awake", this.gameObject);
+        //LuaManager.Instance.LuaClient.luaState.DoFile("Login.lua");
+        //LuaManager.Instance.LuaClient.CallFunc("Login.Awake", this.gameObject);
     }
 
     // Update is called once per frame

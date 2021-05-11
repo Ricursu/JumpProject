@@ -164,7 +164,7 @@ public static class CustomSettings
         //myType
         _GT(typeof(Util)),
         _GT(typeof(Path)),
-        _GT(typeof(Directory)),
+        //_GT(typeof(Directory)),
         //_GT(typeof(DiffUtils)),
         //_GT(typeof(FileUtils)),
         //_GT(typeof(WebUtils)),
@@ -178,7 +178,7 @@ public static class CustomSettings
 
         //HotUpdate Type
         //_GT(typeof(Directory)),
-        _GT(typeof(File)),
+        //_GT(typeof(File)),
         _GT(typeof(EncodingUtils)),
 
         _GT(typeof(HotUpdate)),

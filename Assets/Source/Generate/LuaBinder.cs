@@ -117,8 +117,6 @@ public static class LuaBinder
 		L.RegFunction("Func_bool", System_Func_bool);
 		L.BeginModule("IO");
 		System_IO_PathWrap.Register(L);
-		System_IO_DirectoryWrap.Register(L);
-		System_IO_FileWrap.Register(L);
 		L.EndModule();
 		L.EndModule();
 		L.EndModule();

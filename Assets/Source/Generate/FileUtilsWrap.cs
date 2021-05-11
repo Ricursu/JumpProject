@@ -11,6 +11,10 @@ public class FileUtilsWrap
 		L.RegFunction("CreateFile", CreateFile);
 		L.RegFunction("ReadFileLines", ReadFileLines);
 		L.RegFunction("ReadFileBytes", ReadFileBytes);
+		L.RegFunction("FileExists", FileExists);
+		L.RegFunction("DirectoryExists", DirectoryExists);
+		L.RegFunction("DirectoryDelete", DirectoryDelete);
+		L.RegFunction("DirectoryGetFiles", DirectoryGetFiles);
 		L.RegFunction("CopyFileToPath", CopyFileToPath);
 		L.RegFunction("New", _CreateFileUtils);
 		L.RegFunction("__tostring", ToLua.op_ToString);
@@ -102,6 +106,74 @@ public class FileUtilsWrap
 			ToLua.CheckArgsCount(L, 1);
 			string arg0 = ToLua.CheckString(L, 1);
 			byte[] o = FileUtils.ReadFileBytes(arg0);
+			ToLua.Push(L, o);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int FileExists(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			string arg0 = ToLua.CheckString(L, 1);
+			bool o = FileUtils.FileExists(arg0);
+			LuaDLL.lua_pushboolean(L, o);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DirectoryExists(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			string arg0 = ToLua.CheckString(L, 1);
+			bool o = FileUtils.DirectoryExists(arg0);
+			LuaDLL.lua_pushboolean(L, o);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DirectoryDelete(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			string arg0 = ToLua.CheckString(L, 1);
+			bool arg1 = LuaDLL.luaL_checkboolean(L, 2);
+			FileUtils.DirectoryDelete(arg0, arg1);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DirectoryGetFiles(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			string arg0 = ToLua.CheckString(L, 1);
+			string[] o = FileUtils.DirectoryGetFiles(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
