@@ -43,9 +43,9 @@ public class LuaManager : MonoBehaviour
         yield return 0;
         LuaManager.Instance.LuaClient.luaState.DoFile("HotUpdate.lua");
         LuaManager.Instance.LuaClient.CallFunc("HotUpdate.Awake", this.gameObject);
-        LuaManager.Instance.LuaClient.luaState.DoFile("Login.lua");
-        LuaManager.Instance.LuaClient.CallFunc("Login.Awake", GameObject.Find("Canvas"));
+        //LuaManager.Instance.LuaClient.luaState.DoFile("Login.lua");
+        //LuaManager.Instance.LuaClient.CallFunc("Login.Awake", GameObject.Find("Canvas"));
         yield return new WaitForSeconds(5.0f);
-        Debug.LogError(1);
+        //Debug.LogError(1);
     }
 }

@@ -7,10 +7,16 @@ public class HotUpdateWrap
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(HotUpdate), typeof(System.Object));
+		L.RegFunction("ChangeLoadingprogress", ChangeLoadingprogress);
+		L.RegFunction("ChangeLoadingimformation", ChangeLoadingimformation);
+		L.RegFunction("ChangeSlider", ChangeSlider);
 		L.RegFunction("New", _CreateHotUpdate);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("mReleaseVersion", get_mReleaseVersion, set_mReleaseVersion);
 		L.RegVar("mMajorVersion", get_mMajorVersion, set_mMajorVersion);
+		L.RegVar("objProcessBar", get_objProcessBar, set_objProcessBar);
+		L.RegVar("Loadingprogress", get_Loadingprogress, set_Loadingprogress);
+		L.RegVar("Loadingimformation", get_Loadingimformation, set_Loadingimformation);
 		L.EndClass();
 	}
 
@@ -31,6 +37,54 @@ public class HotUpdateWrap
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to ctor method: HotUpdate.New");
 			}
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int ChangeLoadingprogress(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			string arg0 = ToLua.CheckString(L, 1);
+			HotUpdate.ChangeLoadingprogress(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int ChangeLoadingimformation(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			string arg0 = ToLua.CheckString(L, 1);
+			HotUpdate.ChangeLoadingimformation(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int ChangeSlider(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			string arg0 = ToLua.CheckString(L, 1);
+			HotUpdate.ChangeSlider(arg0);
+			return 0;
 		}
 		catch (Exception e)
 		{
@@ -67,6 +121,48 @@ public class HotUpdateWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_objProcessBar(IntPtr L)
+	{
+		try
+		{
+			ToLua.PushSealed(L, HotUpdate.objProcessBar);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_Loadingprogress(IntPtr L)
+	{
+		try
+		{
+			ToLua.Push(L, HotUpdate.Loadingprogress);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_Loadingimformation(IntPtr L)
+	{
+		try
+		{
+			ToLua.Push(L, HotUpdate.Loadingimformation);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_mReleaseVersion(IntPtr L)
 	{
 		try
@@ -88,6 +184,51 @@ public class HotUpdateWrap
 		{
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			HotUpdate.mMajorVersion = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_objProcessBar(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 2, typeof(UnityEngine.GameObject));
+			HotUpdate.objProcessBar = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_Loadingprogress(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckObject<UnityEngine.UI.Text>(L, 2);
+			HotUpdate.Loadingprogress = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_Loadingimformation(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.UI.Text arg0 = (UnityEngine.UI.Text)ToLua.CheckObject<UnityEngine.UI.Text>(L, 2);
+			HotUpdate.Loadingimformation = arg0;
 			return 0;
 		}
 		catch (Exception e)

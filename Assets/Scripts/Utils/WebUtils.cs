@@ -28,20 +28,21 @@ public class WebUtils
         //Debug.Log(WebUtils.GetIPAddress());
         string path = WebUtils.IP + filename;    // "http://" + WebUtils.GetIPAddress() + "/" +
         Debug.Log(path);
-        UnityWebRequest request = UnityWebRequest.Get(path);
-        request.SendWebRequest();
+        WWW request = new WWW(path);
         while (!request.isDone)
         {
-            Debug.Log("GetFileFromServer:\n====================\n" + request.downloadProgress + "\n====================");
+            HotUpdate.ChangeSlider(System.Convert.ToString(request.progress));
+            HotUpdate.ChangeLoadingprogress(System.Convert.ToString(request.progress * 100));
+            //Debug.LogWarning("GetFileFromServer:\n====================\n" + request.progress + "\n====================");
         }
-        if (request.isNetworkError)
+        if (request.error != null)
         {
             Debug.Log("\n=======\n\n===下载失败====\n\n=======\n");
             return;
         }
         if (request.isDone)                  //下载完成
         {
-            byte[] bytes = request.downloadHandler.data;
+            byte[] bytes = request.bytes;
 
             //if (Application.platform == RuntimePlatform.Android)
             //{
@@ -90,13 +91,14 @@ public class WebUtils
         //Debug.Log(WebUtils.GetIPAddress());
         string path = WebUtils.IP + filename;    // "http://" + WebUtils.GetIPAddress() + "/" +
         Debug.Log(path);
-        UnityWebRequest request = UnityWebRequest.Get(path);
-        request.SendWebRequest();
+        WWW request = new WWW(path);
         while (!request.isDone)
         {
-            Debug.Log("GetFileFromServer:\n====================\n" + request.downloadProgress + "\n====================");
+            HotUpdate.ChangeSlider(System.Convert.ToString(request.progress));
+            HotUpdate.ChangeLoadingprogress(System.Convert.ToString(request.progress * 100));
+            //Debug.LogWarning("GetFileFromServer:\n====================\n" + request.progress + "\n====================");
         }
-        if (request.isNetworkError)
+        if (request.error != null)
         {
             Debug.Log("\n=======\n\n===下载失败====\n\n=======\n");
             return null;
@@ -106,7 +108,7 @@ public class WebUtils
 #if UNITY_EDITOR
             UnityEditor.AssetDatabase.Refresh();
 #endif
-            return request.downloadHandler.data;
+            return request.bytes;
             Debug.Log(" 下载完成");
             //UnZipTool.UnZipPackage(fileName);
         }
@@ -121,7 +123,9 @@ public class WebUtils
         {
             while (!www.isDone)
             {
-                Debug.Log("GetApkFromFileManager:\n=================\n" + www.progress + "\n=================\n");
+                HotUpdate.ChangeSlider(System.Convert.ToString(www.progress));
+                HotUpdate.ChangeLoadingprogress(System.Convert.ToString(www.progress * 100));
+                //Debug.LogWarning("GetFileFromServer:\n====================\n" + www.progress + "\n====================");
             }
 
             if (www.isDone)

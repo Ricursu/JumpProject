@@ -10,6 +10,7 @@ using System.IO;
 using System.Net;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class HotUpdate
 {
@@ -17,9 +18,31 @@ public class HotUpdate
     public static int mReleaseVersion = 1;
     public static int mMajorVersion = 0;
 
+    public static GameObject objProcessBar;
+    public static Text Loadingprogress;
+    public static Text Loadingimformation;
+
+
     public HotUpdate()
     {
         Debug.Log("HotUpdate Class " + mReleaseVersion + "." + mMajorVersion);
+        objProcessBar = GameObject.Find("Slider");
+        Loadingprogress = GameObject.Find("Loadingprogress").GetComponent<Text>();
+        Loadingimformation = GameObject.Find("Loadingimformation").GetComponent<Text>();
+    }
+
+    public static void ChangeLoadingprogress(string s)
+    {
+        Loadingprogress.text = "Loading progress   " + s.ToString() + "%";
+    }
+    public static void ChangeLoadingimformation(string s)
+    {
+        Loadingimformation.text += s.ToString() + "\n";
+    }
+    public static void ChangeSlider(string s)
+    {
+        double process = System.Convert.ToDouble(s);
+        objProcessBar.GetComponent<Slider>().value = (float)process;
     }
 
     //    /// <summary>
