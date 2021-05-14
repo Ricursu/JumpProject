@@ -1,41 +1,99 @@
 HotUpdate = {}
 local this = HotUpdate
+local cor = coroutine.create(
+    function() 
+        HotUpdate.HotUpdateProcess() 
+    end
+    );
 
 function this.Awake(object)
+    coroutine.resume(cor);
+    -- coroutine.resume(cor);
+end
+
+function this.Update()
+    if WebUtils.isDone then
+        WebUtils.isDone = false;
+        coroutine.resume(cor);
+    end
+end
+
+function this.HotUpdateProcess()
     HotUpdateClass.ChangeLoadingimformation("检查更新中");
+    HotUpdateClass.ClearSlider()
+    HotUpdateClass.FullSlider()
+    if not WebUtils.isDone then
+        coroutine.yield()
+    end
     -- 1、创建版本文件config.ini
     this.CreateVersionFile();
     -- 2、判断是否需要更新
     if not this.IsUpdate() then
         HotUpdateClass.ChangeLoadingimformation("目前为最新版本\n正在进入游戏");
+        HotUpdateClass.ClearSlider()
+        HotUpdateClass.FullSlider()
+        if not WebUtils.isDone then
+            coroutine.yield()
+        end
         SceneManagement.SceneManager.LoadScene("MainMenu")
         return;
     end
     HotUpdateClass.ChangeLoadingimformation("检测本地资源");
+    HotUpdateClass.ClearSlider()
+    HotUpdateClass.FullSlider()
+    if not WebUtils.isDone then
+        coroutine.yield()
+    end
     -- 3、判断是否需要释放APK
     if not FileUtils.DirectoryExists(Path.Combine(Application.persistentDataPath, "Lua")) then
         -- 3.1、从文件管理器中获取APK
         HotUpdateClass.ChangeLoadingimformation("获取本地资源");
         this.GetApkFromFileManager();
+        if not WebUtils.isDone then
+            coroutine.yield()
+        end
         -- 3.2、 解压APK
         HotUpdateClass.ChangeLoadingimformation("释放本地资源");
         UnZipTool.UnZipApk(Application.persistentDataPath .. "/base.apk", Path.Combine(Application.persistentDataPath, "Lua"));
     end
     HotUpdateClass.ChangeLoadingimformation("本地资源加载完成");
+    HotUpdateClass.ClearSlider()
+    HotUpdateClass.FullSlider()
+    if not WebUtils.isDone then
+        coroutine.yield()
+    end
 
     -- 4、获取服务器压缩文件
     HotUpdateClass.ChangeLoadingimformation("正在获取服务器端资源");
     this.GetZipFromServer();
+    if not WebUtils.isDone then
+        coroutine.yield()
+    end
+
     -- 5、解压第4步中获取的压缩文件
     HotUpdateClass.ChangeLoadingimformation("释放服务器端资源");
     this.UnZipFile();
+    HotUpdateClass.ClearSlider()
+    HotUpdateClass.FullSlider()
+    if not WebUtils.isDone then
+        coroutine.yield()
+    end
     -- 6、还原压缩文件中的差分包或将压缩文件中的Lua文件复制到本地文件
     HotUpdateClass.ChangeLoadingimformation("更新本地资源中");
     this.RedutionFile();
+    HotUpdateClass.ClearSlider()
+    HotUpdateClass.FullSlider()
+    if not WebUtils.isDone then
+        coroutine.yield()
+    end
 
     -- 7、 更新本地版本文件version.ini的内容
     FileUtils.CreateFile(Path.Combine(Application.persistentDataPath, "config.ini"), WebUtils.GetByteFromServer("version.txt"));
     HotUpdateClass.ChangeLoadingimformation("更新完成");
+    HotUpdateClass.FullSlider()
+    if not WebUtils.isDone then
+        coroutine.yield()
+    end
     SceneManagement.SceneManager.LoadScene("MainMenu")
 end
 

@@ -10,6 +10,8 @@ public class HotUpdateWrap
 		L.RegFunction("ChangeLoadingprogress", ChangeLoadingprogress);
 		L.RegFunction("ChangeLoadingimformation", ChangeLoadingimformation);
 		L.RegFunction("ChangeSlider", ChangeSlider);
+		L.RegFunction("ClearSlider", ClearSlider);
+		L.RegFunction("FullSlider", FullSlider);
 		L.RegFunction("New", _CreateHotUpdate);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("mReleaseVersion", get_mReleaseVersion, set_mReleaseVersion);
@@ -93,6 +95,36 @@ public class HotUpdateWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int ClearSlider(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 0);
+			HotUpdate.ClearSlider();
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int FullSlider(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 0);
+			HotUpdate.FullSlider();
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_mReleaseVersion(IntPtr L)
 	{
 		try
@@ -125,7 +157,7 @@ public class HotUpdateWrap
 	{
 		try
 		{
-			ToLua.PushSealed(L, HotUpdate.objProcessBar);
+			ToLua.Push(L, HotUpdate.objProcessBar);
 			return 1;
 		}
 		catch (Exception e)
@@ -197,7 +229,7 @@ public class HotUpdateWrap
 	{
 		try
 		{
-			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 2, typeof(UnityEngine.GameObject));
+			UnityEngine.UI.Slider arg0 = (UnityEngine.UI.Slider)ToLua.CheckObject<UnityEngine.UI.Slider>(L, 2);
 			HotUpdate.objProcessBar = arg0;
 			return 0;
 		}

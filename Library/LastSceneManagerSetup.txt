@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Jump.unity
+- path: Assets/Scenes/update.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

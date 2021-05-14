@@ -8,6 +8,8 @@ ScriptsOnlyBuild:
     - TestPlayer
     DOTween.dll:
     - DG.Tweening.Core.DOTweenSettings
+    Unity.Mobile.AndroidLogcat.Editor.dll:
+    - Unity.Android.Logcat.AndroidLogcatManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.TestRunner.dll:
@@ -135,8 +137,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13198}
     - Class: 114
-      Script: {instanceID: 13312}
-    - Class: 114
       Script: {instanceID: 13674}
     - Class: 115
       Script: {instanceID: 0}
@@ -213,8 +213,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13674}
     - Class: 114
       Script: {instanceID: 13720}
-    - Class: 114
-      Script: {instanceID: 14146}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128

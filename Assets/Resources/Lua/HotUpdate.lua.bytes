@@ -1,7 +1,24 @@
 HotUpdate = {}
 local this = HotUpdate
+local cor = coroutine.create(
+    function() 
+        HotUpdate.HotUpdateProcess() 
+    end
+    );
 
 function this.Awake(object)
+    coroutine.resume(cor);
+    -- coroutine.resume(cor);
+end
+
+function this.Update()
+    if WebUtils.isDone then
+        coroutine.resume(cor);
+        WebUtils.isDone = false;
+    end
+end
+
+function this.HotUpdateProcess()
     HotUpdateClass.ChangeLoadingimformation("检查更新中");
     -- 1、创建版本文件config.ini
     this.CreateVersionFile();
@@ -17,6 +34,9 @@ function this.Awake(object)
         -- 3.1、从文件管理器中获取APK
         HotUpdateClass.ChangeLoadingimformation("获取本地资源");
         this.GetApkFromFileManager();
+        -- if not WebUtils.isDone then
+        --     coroutine.yield()
+        -- end
         -- 3.2、 解压APK
         HotUpdateClass.ChangeLoadingimformation("释放本地资源");
         UnZipTool.UnZipApk(Application.persistentDataPath .. "/base.apk", Path.Combine(Application.persistentDataPath, "Lua"));
@@ -26,6 +46,10 @@ function this.Awake(object)
     -- 4、获取服务器压缩文件
     HotUpdateClass.ChangeLoadingimformation("正在获取服务器端资源");
     this.GetZipFromServer();
+    if not WebUtils.isDone then
+        coroutine.yield()
+    end
+
     -- 5、解压第4步中获取的压缩文件
     HotUpdateClass.ChangeLoadingimformation("释放服务器端资源");
     this.UnZipFile();

@@ -9,12 +9,18 @@ public class WebUtilsWrap
 		L.BeginClass(typeof(WebUtils), typeof(System.Object));
 		L.RegFunction("GetIPAddress", GetIPAddress);
 		L.RegFunction("GetFileFromServer", GetFileFromServer);
+		L.RegFunction("ThreadDownLoad", ThreadDownLoad);
 		L.RegFunction("IsExistFileInServer", IsExistFileInServer);
 		L.RegFunction("GetByteFromServer", GetByteFromServer);
 		L.RegFunction("GetApkFromFile", GetApkFromFile);
+		L.RegFunction("GetLength", GetLength);
+		L.RegFunction("ThreadGetApk", ThreadGetApk);
 		L.RegFunction("New", _CreateWebUtils);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("IP", get_IP, set_IP);
+		L.RegVar("isDone", get_isDone, set_isDone);
+		L.RegVar("processText", get_processText, set_processText);
+		L.RegVar("processSlider", get_processSlider, set_processSlider);
 		L.EndClass();
 	}
 
@@ -75,6 +81,23 @@ public class WebUtilsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int ThreadDownLoad(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			string arg0 = ToLua.CheckString(L, 1);
+			string arg1 = ToLua.CheckString(L, 2);
+			WebUtils.ThreadDownLoad(arg0, arg1);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int IsExistFileInServer(IntPtr L)
 	{
 		try
@@ -124,11 +147,88 @@ public class WebUtilsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetLength(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			string arg0 = ToLua.CheckString(L, 1);
+			long o = WebUtils.GetLength(arg0);
+			LuaDLL.tolua_pushint64(L, o);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int ThreadGetApk(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			string arg0 = ToLua.CheckString(L, 1);
+			string arg1 = ToLua.CheckString(L, 2);
+			UnityEngine.WWW arg2 = (UnityEngine.WWW)ToLua.CheckObject<UnityEngine.WWW>(L, 3);
+			WebUtils.ThreadGetApk(arg0, arg1, arg2);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_IP(IntPtr L)
 	{
 		try
 		{
 			LuaDLL.lua_pushstring(L, WebUtils.IP);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_isDone(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, WebUtils.isDone);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_processText(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushstring(L, WebUtils.processText);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_processSlider(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushstring(L, WebUtils.processSlider);
 			return 1;
 		}
 		catch (Exception e)
@@ -144,6 +244,51 @@ public class WebUtilsWrap
 		{
 			string arg0 = ToLua.CheckString(L, 2);
 			WebUtils.IP = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_isDone(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			WebUtils.isDone = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_processText(IntPtr L)
+	{
+		try
+		{
+			string arg0 = ToLua.CheckString(L, 2);
+			WebUtils.processText = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_processSlider(IntPtr L)
+	{
+		try
+		{
+			string arg0 = ToLua.CheckString(L, 2);
+			WebUtils.processSlider = arg0;
 			return 0;
 		}
 		catch (Exception e)

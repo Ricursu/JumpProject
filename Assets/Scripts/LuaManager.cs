@@ -27,7 +27,8 @@ public class LuaManager : MonoBehaviour
         //需要将LuaClient中的protected LuaState luaState = null;改为public，
         //同时可以在LuaClient中再封装一个调用Lua模块函数的方法。
         luaClient = this.gameObject.AddComponent<LuaClient>();
-        StartCoroutine(LuaHotUpdate());
+        LuaManager.Instance.LuaClient.luaState.DoFile("HotUpdate.lua");
+        LuaManager.Instance.LuaClient.CallFunc("HotUpdate.Awake", this.gameObject);
         //重启Lua虚拟机
         //gameObject.GetComponent<LuaClient>().Destroy();
         //gameObject.GetComponent<LuaClient>().Init();
@@ -35,12 +36,13 @@ public class LuaManager : MonoBehaviour
 
     private void Update()
     {
-
+        LuaManager.Instance.LuaClient.CallFunc("HotUpdate.Update", this.gameObject);
     }
 
     IEnumerator LuaHotUpdate()
     {
         yield return 0;
+        //yield return WebUtils.GetFileFromServer("v1.0-v1.1.zip");
         LuaManager.Instance.LuaClient.luaState.DoFile("HotUpdate.lua");
         LuaManager.Instance.LuaClient.CallFunc("HotUpdate.Awake", this.gameObject);
         //LuaManager.Instance.LuaClient.luaState.DoFile("Login.lua");

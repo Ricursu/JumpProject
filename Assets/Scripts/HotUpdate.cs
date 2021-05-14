@@ -18,7 +18,7 @@ public class HotUpdate
     public static int mReleaseVersion = 1;
     public static int mMajorVersion = 0;
 
-    public static GameObject objProcessBar;
+    public static Slider objProcessBar;
     public static Text Loadingprogress;
     public static Text Loadingimformation;
 
@@ -26,7 +26,7 @@ public class HotUpdate
     public HotUpdate()
     {
         Debug.Log("HotUpdate Class " + mReleaseVersion + "." + mMajorVersion);
-        objProcessBar = GameObject.Find("Slider");
+        objProcessBar = GameObject.Find("Slider").GetComponent<Slider>();
         Loadingprogress = GameObject.Find("Loadingprogress").GetComponent<Text>();
         Loadingimformation = GameObject.Find("Loadingimformation").GetComponent<Text>();
     }
@@ -42,7 +42,19 @@ public class HotUpdate
     public static void ChangeSlider(string s)
     {
         double process = System.Convert.ToDouble(s);
-        objProcessBar.GetComponent<Slider>().value = (float)process;
+        objProcessBar.value = (float)process;
+    }
+    public static void ClearSlider()
+    {
+        ChangeSlider("0");
+        ChangeLoadingprogress("0");
+        new System.Threading.Thread(delegate () { WebUtils.isDone = false; System.Threading.Thread.Sleep(1000); WebUtils.isDone = true; }).Start();
+        }
+    public static void FullSlider()
+    {
+        ChangeSlider("1");
+        ChangeLoadingprogress("100");
+        new System.Threading.Thread(delegate () { WebUtils.isDone = false; System.Threading.Thread.Sleep(1000); WebUtils.isDone = true; }).Start();
     }
 
     //    /// <summary>

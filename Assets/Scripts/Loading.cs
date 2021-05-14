@@ -12,6 +12,7 @@ public class Loading : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        HotUpdate.ChangeSlider(WebUtils.processSlider);
+        HotUpdate.ChangeLoadingprogress(WebUtils.processText);
     }
 }
