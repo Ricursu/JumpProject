@@ -160,7 +160,7 @@ public static class CustomSettings
         _GT(typeof(UIEvent)),
         _GT(typeof(BoxControl)),
         _GT(typeof(SceneManager)),
-        _GT(typeof(Util_xia))
+        _GT(typeof(Util_xia)),//张智君于2021.05.18添加此行
     };
 
     public static List<Type> dynamicList = new List<Type>()
