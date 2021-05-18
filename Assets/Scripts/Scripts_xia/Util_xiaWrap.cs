@@ -30,7 +30,7 @@ public class Util_xiaWrap
             if (parameterCount == 1 && TypeChecker.CheckTypes<string>(L, 1))
             {
                 string path = ToLua.ToString(L, 1);
-                byte[] bytes = Util.DecompressFile(path);
+                byte[] bytes = Util_xia.DecompressFile(path);
                 ToLua.PushByteBuffer(L, bytes);
                 return 1;
 
@@ -68,7 +68,7 @@ public class Util_xiaWrap
                     bytes.Add(Convert.ToByte(numbers[i]));
                 }
 
-                Util.CompressFile(bytes.ToArray(), path);
+                Util_xia.CompressFile(bytes.ToArray(), path);
                 return 1;
 
             }
@@ -77,7 +77,7 @@ public class Util_xiaWrap
                 byte[] bytes = ToLua.ToByteBuffer(L, 1);
                 string path = ToLua.ToString(L, 2);
 
-                Util.CompressFile(bytes, path);
+                Util_xia.CompressFile(bytes, path);
                 return 1;
             }
 
@@ -100,7 +100,7 @@ public class Util_xiaWrap
             if (parameterCount == 1 && TypeChecker.CheckTypes<byte[]>(L, 1))
             {
                 byte[] bytes = ToLua.CheckByteBuffer(L, 1);
-                ushort short16 = Util.GetCRC(bytes);
+                ushort short16 = Util_xia.GetCRC(bytes);
                 LuaDLL.lua_pushnumber(L, short16);
                 return 1;
             }
@@ -114,7 +114,7 @@ public class Util_xiaWrap
                 {
                     bytes.Add(Convert.ToByte(numbers[i]));
                 }
-                ushort short16 = Util.GetCRC(bytes.ToArray());
+                ushort short16 = Util_xia.GetCRC(bytes.ToArray());
                 LuaDLL.lua_pushnumber(L, short16);
                 return 1;
             }
@@ -128,7 +128,7 @@ public class Util_xiaWrap
                 {
                     bytes.Add(Convert.ToByte(numbers[i]));
                 }
-                ushort short16 = Util.GetCRC(bytes.ToArray(), option);
+                ushort short16 = Util_xia.GetCRC(bytes.ToArray(), option);
                 LuaDLL.lua_pushnumber(L, short16);
                 return 1;
             }
@@ -137,7 +137,7 @@ public class Util_xiaWrap
                 byte[] bytes = ToLua.CheckByteBuffer(L, 1);
                 int option = (int)LuaDLL.luaL_checknumber(L, 2);
 
-                ushort short16 = Util.GetCRC(bytes, option);
+                ushort short16 = Util_xia.GetCRC(bytes, option);
                 LuaDLL.lua_pushnumber(L, short16);
                 return 1;
             }
@@ -171,7 +171,7 @@ public class Util_xiaWrap
                     bytes.Add(Convert.ToByte(numbers[i]));
                 }
 
-                string str = Util.GetMD5(bytes.ToArray());
+                string str = Util_xia.GetMD5(bytes.ToArray());
                 LuaDLL.lua_pushstring(L, str);
                 return 1;
             }
@@ -179,7 +179,7 @@ public class Util_xiaWrap
             {
                 byte[] bytes = ToLua.ToByteBuffer(L, 1);
 
-                string str = Util.GetMD5(bytes);
+                string str = Util_xia.GetMD5(bytes);
                 LuaDLL.lua_pushstring(L, str);
                 return 1;
             }
@@ -204,12 +204,12 @@ public class Util_xiaWrap
             if (parameterCount == 1 && TypeChecker.CheckTypes<int>(L, 1))
             {
                 int number = (int)LuaDLL.luaL_checknumber(L, 1);
-                Util.DebugProxy(number);
+                Util_xia.DebugProxy(number);
             }
             else if (parameterCount == 1 && TypeChecker.CheckTypes<string>(L, 1))
             {
                 string str = ToLua.ToString(L, 1);
-                Util.DebugProxy(str);
+                Util_xia.DebugProxy(str);
             }
 
 
