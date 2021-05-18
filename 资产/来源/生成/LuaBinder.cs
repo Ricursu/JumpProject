@@ -11,6 +11,7 @@ public static class LuaBinder
 		L.BeginModule(null);
 		LuaInterface_DebuggerWrap.Register(L);
 		LuaProfilerWrap.Register(L);
+		Util_xiaWrap.Register(L);//张智君于2021.05.18 16：04增加此行
 		UtilWrap.Register(L);
 		UIEventWrap.Register(L);
 		BoxControlWrap.Register(L);
