@@ -36,7 +36,7 @@ public class Util_xiaWrap
 
             }
 
-            return 1;
+            return 0;
         }
         catch (Exception e)
         {
@@ -205,17 +205,19 @@ public class Util_xiaWrap
             {
                 int number = (int)LuaDLL.luaL_checknumber(L, 1);
                 Util_xia.DebugProxy(number);
+                retirn 1;
             }
             else if (parameterCount == 1 && TypeChecker.CheckTypes<string>(L, 1))
             {
                 string str = ToLua.ToString(L, 1);
                 Util_xia.DebugProxy(str);
+                return 1;
             }
 
 
             object obj1 = ToLua.ToVarObject(L, 1);
             byte[] bytes = ToLua.ToByteBuffer(L, 1);
-            return 1;
+            return 0;
         }
         catch (Exception e)
         {
