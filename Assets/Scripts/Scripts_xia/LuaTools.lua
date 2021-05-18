@@ -1,31 +1,31 @@
 
 LuaTools={}
- --·µ»ØÖµÎª32Î»MD5µÄ×Ö·û´®
+ --è¿”å›å€¼ä¸º32ä½MD5çš„å­—ç¬¦ä¸²
 LuaTools.GetMD5=function (fileBytes)
 	
-	return Util.GetMD5(fileBytes)
+	return Util_xia.GetMD5(fileBytes)
 	-- body
 end
---·µ»ØÖµÎªĞ£ÑéºÍµÄ16½øÖÆÊı
+--è¿”å›å€¼ä¸ºæ ¡éªŒå’Œçš„16è¿›åˆ¶æ•°
 LuaTools.GetCRC=function (fileBytes )
 
-	return Util.GetCRC(fileBytes)
+	return Util_xia.GetCRC(fileBytes)
 	-- body
 end
---Ñ¹ËõÎÄ¼ş,²ÎÊıÒ»´«ÈëÒªÑ¹ËõµÄÎÄ¼şµÄ×Ö½ÚÊı×é,²ÎÊı¶ş´«ÈëÑ¹Ëõºó±£´æµÄÂ·¾¶,Ã»ÓĞ·µ»ØÖµ
+--å‹ç¼©æ–‡ä»¶,å‚æ•°ä¸€ä¼ å…¥è¦å‹ç¼©çš„æ–‡ä»¶çš„å­—èŠ‚æ•°ç»„,å‚æ•°äºŒä¼ å…¥å‹ç¼©åä¿å­˜çš„è·¯å¾„,æ²¡æœ‰è¿”å›å€¼
 LuaTools.CompressFile=function ( fileBytes,path )
 	
-	Util.CompressFile(fileBytes,path)	
+	Util_xia.CompressFile(fileBytes,path)	
 	-- body
 end
---´«ÈëÒª½âÑ¹µÄÍêÕûÂ·¾¶,·µ»ØÖµÎª½âÑ¹ºóµÄÎÄ¼şµÄ×Ö½ÚÊı×é
+--ä¼ å…¥è¦è§£å‹çš„å®Œæ•´è·¯å¾„,è¿”å›å€¼ä¸ºè§£å‹åçš„æ–‡ä»¶çš„å­—èŠ‚æ•°ç»„
 LuaTools.DecompressFile=function ( path )
 
-    return Util.DecompressFile(path)
+    return Util_xia.DecompressFile(path)
 	-- body
 end
 LuaTools.DebugProxy=function(mg)
-	Util.DebugProxy(mg)
+	Util_xia.DebugProxy(mg)
 	-- body
 end
 
