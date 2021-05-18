@@ -46,15 +46,15 @@ public class HotUpdate
     }
     public static void ClearSlider()
     {
-        new System.Threading.Thread(delegate () { WebUtils.isDone = false; System.Threading.Thread.Sleep(500); WebUtils.isDone = true; }).Start();
         WebUtils.processSlider = (0).ToString();
         WebUtils.processText = (0).ToString();
+        new System.Threading.Thread(delegate () { WebUtils.isDone = false; System.Threading.Thread.Sleep(1000); WebUtils.isDone = true; }).Start();
+        WebUtils.processSlider = (1).ToString();
+        WebUtils.processText = (100).ToString();
     }
     public static void FullSlider()
     {
-        new System.Threading.Thread(delegate () { WebUtils.isDone = false; System.Threading.Thread.Sleep(500); WebUtils.isDone = true; }).Start();
-        WebUtils.processSlider = (1).ToString();
-        WebUtils.processText = (100).ToString();
+        //new System.Threading.Thread(delegate () { WebUtils.isDone = false; System.Threading.Thread.Sleep(500); WebUtils.isDone = true; }).Start();
     }
 
     //    /// <summary>

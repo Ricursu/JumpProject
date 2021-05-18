@@ -21,7 +21,7 @@ end
 function this.HotUpdateProcess()
     HotUpdateClass.ChangeLoadingimformation("检查更新中");
     HotUpdateClass.ClearSlider()
-    HotUpdateClass.FullSlider()
+    -- HotUpdateClass.FullSlider()
     if not WebUtils.isDone then
         coroutine.yield()
     end
@@ -31,7 +31,7 @@ function this.HotUpdateProcess()
     if not this.IsUpdate() then
         HotUpdateClass.ChangeLoadingimformation("目前为最新版本\n正在进入游戏");
         HotUpdateClass.ClearSlider()
-        HotUpdateClass.FullSlider()
+        -- HotUpdateClass.FullSlider()
         if not WebUtils.isDone then
             coroutine.yield()
         end
@@ -40,7 +40,7 @@ function this.HotUpdateProcess()
     end
     HotUpdateClass.ChangeLoadingimformation("检测本地资源");
     HotUpdateClass.ClearSlider()
-    HotUpdateClass.FullSlider()
+    -- HotUpdateClass.FullSlider()
     if not WebUtils.isDone then
         coroutine.yield()
     end
@@ -58,7 +58,7 @@ function this.HotUpdateProcess()
     end
     HotUpdateClass.ChangeLoadingimformation("本地资源加载完成");
     HotUpdateClass.ClearSlider()
-    HotUpdateClass.FullSlider()
+    -- HotUpdateClass.FullSlider()
     if not WebUtils.isDone then
         coroutine.yield()
     end
@@ -74,7 +74,7 @@ function this.HotUpdateProcess()
     HotUpdateClass.ChangeLoadingimformation("释放服务器端资源");
     this.UnZipFile();
     HotUpdateClass.ClearSlider()
-    HotUpdateClass.FullSlider()
+    -- HotUpdateClass.FullSlider()
     if not WebUtils.isDone then
         coroutine.yield()
     end
@@ -82,7 +82,7 @@ function this.HotUpdateProcess()
     HotUpdateClass.ChangeLoadingimformation("更新本地资源中");
     this.RedutionFile();
     HotUpdateClass.ClearSlider()
-    HotUpdateClass.FullSlider()
+    -- HotUpdateClass.FullSlider()
     if not WebUtils.isDone then
         coroutine.yield()
     end
@@ -90,7 +90,8 @@ function this.HotUpdateProcess()
     -- 7、 更新本地版本文件version.ini的内容
     FileUtils.CreateFile(Path.Combine(Application.persistentDataPath, "config.ini"), WebUtils.GetByteFromServer("version.txt"));
     HotUpdateClass.ChangeLoadingimformation("更新完成");
-    HotUpdateClass.FullSlider()
+    HotUpdateClass.ClearSlider()
+    -- HotUpdateClass.FullSlider()
     if not WebUtils.isDone then
         coroutine.yield()
     end

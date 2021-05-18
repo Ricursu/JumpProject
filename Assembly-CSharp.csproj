@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\BoxControl.cs" />
     <Compile Include="Assets\Scripts\HotUpdate.cs" />
     <Compile Include="Assets\Scripts\HttpDownLoad.cs" />
+    <Compile Include="Assets\Scripts\IPCompare.cs" />
     <Compile Include="Assets\Scripts\LoadFromFile.cs" />
     <Compile Include="Assets\Scripts\Loading.cs" />
     <Compile Include="Assets\Scripts\Login.cs" />
