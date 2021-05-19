@@ -9,8 +9,6 @@ ScriptsOnlyBuild:
     - TestPlayer
     DOTween.dll:
     - DG.Tweening.Core.DOTweenSettings
-    Unity.Mobile.AndroidLogcat.Editor.dll:
-    - Unity.Android.Logcat.AndroidLogcatManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     UnityEditor.TestRunner.dll:
@@ -999,4 +997,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Update.unity
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/Jump.unity
-  playerPath: D:/Apk/1t.apk
+  playerPath: D:/Apk/1.1.apk
