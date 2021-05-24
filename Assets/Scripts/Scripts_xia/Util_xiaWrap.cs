@@ -205,7 +205,7 @@ public class Util_xiaWrap
             {
                 int number = (int)LuaDLL.luaL_checknumber(L, 1);
                 Util_xia.DebugProxy(number);
-                retirn 1;
+                return 1;
             }
             else if (parameterCount == 1 && TypeChecker.CheckTypes<string>(L, 1))
             {
